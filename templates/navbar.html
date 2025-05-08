@@ -1,0 +1,52 @@
+<nav class="bg-background sticky top-0 left-0 z-10 shadow-lg border-b border-border">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="flex justify-between">
+      <!-- Logo -->
+      <div class="flex items-center py-4">
+        <a href="#" class="flex items-center">
+          <svg class="h-8 w-8 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+            </path>
+          </svg>
+          <span class="font-semibold text-foreground text-lg">Alasatizah</span>
+        </a>
+      </div>
+
+      <!-- Desktop Menu (right side) -->
+      <div class="hidden md:flex items-center space-x-1">
+        <a href="#" class="py-4 px-3 text-foreground hover:text-primary transition-colors">Sign In</a>
+        <a href="#" class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition duration-300">Become a Hafeez</a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden flex items-center">
+        <button class="outline-none mobile-menu-button" id="mobile-menu-button">
+          <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu (hidden by default) -->
+  <div class="hidden transition-all mobile-menu" id="mobile-menu">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
+      <a href="#" class="block px-3 py-2 text-foreground hover:text-primary border-t border-border transition-colors">Get Started</a>
+      <a href="#"
+        class="block px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition duration-300 text-center border-border">Sign In</a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
+
+  btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+  });
+</script>
