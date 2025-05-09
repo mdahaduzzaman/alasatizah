@@ -1,0 +1,89 @@
+{% load static %}
+<footer class="bg-primary text-white">
+    <div class="max-w-7xl px-4 mx-auto">
+        <!-- info -->
+        <div class="flex flex-col md:flex-wrap md:flex-row gap-8 pt-10">
+            <!-- logo and description -->
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <div class="flex items-center py-4">
+                    <a href="#" class="flex items-center">
+                        <svg class="h-8 w-8 mr-2 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                        <span class="font-semibold text-white text-lg">Alasatizah</span>
+                    </a>
+                </div>
+                <p class="max-w-xs text-justify text-sm">
+                    Alasatizah was founded in 2025. It is Bangladesh's first, most trusted and leading online platform for organization and hafeez to hire verified hafeez or find hafeez jobs in 10 different categories from anywhere in the country.
+                </p>
+            </div>
+
+            <!-- useful links -->
+            <div class="w-full md:w-1/2 lg:w-1/6">
+                <h5 class="font-semibold text-xl mb-4">Useful Links</h5>
+                <div class="flex flex-col gap-2 text-sm">
+                    <a href="#">Terms and Condition</a>
+                    <a href="#">Become a Hafeez</a>
+                    <a href="#">Hire a Hafeez</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+
+            <!-- Social -->
+            <div class="w-full md:w-1/2 lg:w-1/3">
+                <h5 class="font-semibold text-xl mb-4">Social</h5>
+                <div class="flex flex-wrap gap-4 pr-5">
+                    <a href="#" class="w-10 h-10 border border-black rounded-full flex items-center justify-center hover:bg-slate-300 hover:scale-110 transition-all duration-200">
+                        <img src="{% static 'icons/facebook.svg' %}" alt="Facebook" class="w-6 h-6" />
+                    </a>
+                    <a href="#" class="w-10 h-10 border border-black rounded-full flex items-center justify-center hover:bg-slate-300 hover:scale-110 transition-all duration-200">
+                        <img src="{% static 'icons/linkedin.svg' %}" alt="LinkedIn" class="w-6 h-6" />
+                    </a>
+                    <a href="#" class="w-10 h-10 border border-black rounded-full flex items-center justify-center hover:bg-slate-300 hover:scale-110 transition-all duration-200">
+                        <img src="{% static 'icons/x.svg' %}" alt="Twitter" class="w-6 h-6" />
+                    </a>
+                    <a href="#" class="w-10 h-10 border border-black rounded-full flex items-center justify-center hover:bg-slate-300 hover:scale-110 transition-all duration-200">
+                        <img src="{% static 'icons/youtube.svg' %}" alt="YouTube" class="w-6 h-6" />
+                    </a>
+                    <a href="#" class="w-10 h-10 border border-black rounded-full flex items-center justify-center hover:bg-slate-300 hover:scale-110 transition-all duration-200">
+                        <img src="{% static 'icons/instagram.svg' %}" alt="Instagram" class="w-6 h-6" />
+                    </a>
+                    <a href="#" class="w-10 h-10 border border-black rounded-full flex items-center justify-center hover:bg-slate-300 hover:scale-110 transition-all duration-200">
+                        <img src="{% static 'icons/whatsapp.svg' %}" alt="WhatsApp" class="w-6 h-6" />
+                    </a>
+                    <a href="#" class="w-10 h-10 border border-black rounded-full flex items-center justify-center hover:bg-slate-300 hover:scale-110 transition-all duration-200">
+                        <img src="{% static 'icons/tiktok.svg' %}" alt="TikTok" class="w-6 h-6" />
+                    </a>
+                </div>
+            </div>
+
+            <!-- Company Info -->
+            <div class="w-full md:w-1/2 lg:w-1/4">
+                <h5 class="font-semibold text-xl mb-4">Company Info</h5>
+                <div class="text-sm space-y-2">
+                    <p>Trade licence No:<br />TRAD/DNCC/095492/2022</p>
+                    <p>E-TIN Number: 435024284395</p>
+                    <p>BIN Number: 003669024-0102</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- copyright -->
+        <p class="text-center py-5 font-semibold text-sm mt-10">
+            Copyright &copy;
+            <span id="year"></span> Alasatizah Technologies Ltd. All Rights Reserved.
+        </p>
+
+        <!-- disclaimer -->
+        <p class="py-4 text-xs text-center border-t border-white/20">
+            Disclaimer: Alasatizah is an online platform that connects organization with hafeez. Alasatizah does not provide tuition services directly, nor do assign or recommend specific hafeez to organization. Instead, Alasatizah facilitate the process by leveraging technology and security measures to help organization hire verified and skilled hafeez.
+        </p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").innerText = new Date().getFullYear();
+</script>
