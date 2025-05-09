@@ -1,5 +1,5 @@
 {% load static %}
-<nav class="bg-background sticky top-0 left-0 z-10 shadow-lg border-b border-border">
+<nav class="bg-secondary sticky top-0 left-0 z-10 shadow-lg border-b border-border">
   <div class="bg-primary flex items-center gap-2 py-2 text-white ps-[5vw] md:ps-[3vw] lg:ps-[12vw]"><img src="{% static 'icons/phone.svg' %}" alt="Facebook" class="w-4 h-4" /> <span>0123-456789</span></div>
   <div class="max-w-6xl px-4 mx-auto">
     <div class="flex justify-between">
@@ -18,8 +18,8 @@
 
       <!-- Desktop Menu (right side) -->
       <div class="hidden md:flex items-center space-x-1">
-        <a href="#" class="py-4 px-3 text-foreground hover:text-primary transition-colors">Sign In</a>
-        <a href="#" class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition duration-300">Become a Hafeez</a>
+        <a href="{% url 'signin' %}" class="py-4 px-3 text-foreground hover:text-primary transition-colors">Sign In</a>
+        <a href="#" class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-background hover:text-primary border border-primary transition duration-300">Become a Hafeez</a>
       </div>
 
       <!-- Mobile menu button -->
@@ -37,9 +37,8 @@
   <!-- Mobile Menu (hidden by default) -->
   <div class="hidden transition-all mobile-menu" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
-      <a href="#" class="block px-3 py-2 text-foreground hover:text-primary border-t border-border transition-colors">Get Started</a>
-      <a href="#"
-        class="block px-3 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition duration-300 text-center border-border">Sign In</a>
+      <a href="{% url 'signin' %}" class="block px-3 py-2 text-foreground hover:text-primary border-t border-border transition-colors">Sign In</a>
+      <a href="#" class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-background hover:text-primary border border-primary transition duration-300">Become a Hafeez</a>
     </div>
   </div>
 </nav>
