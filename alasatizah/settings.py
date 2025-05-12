@@ -32,14 +32,15 @@ ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="localhost").split(",")
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'core',
-    'accounts',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "widget_tweaks",
+    "core",
+    "accounts",
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'alasatizah.middleware.complete_profile_middleware.CompleteProfileMiddleware',
 ]
 
 ROOT_URLCONF = 'alasatizah.urls'
@@ -156,3 +158,11 @@ MEDIA_ROOT = config("MEDIA_ROOT", default=BASE_DIR / "media")
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# AUTH MODEL
+AUTH_USER_MODEL = "accounts.User"
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# default signin url
+LOGIN_URL = '/accounts/signin/'

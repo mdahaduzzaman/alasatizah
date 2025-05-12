@@ -1,5 +1,84 @@
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Login</button>
-</form>
+{% extends "_base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="bg-secondary">
+  <div class="max-w-2xl mx-auto py-20 px-4">
+    <h1 class="text-4xl text-primary font-medium">Welcome Back</h1>
+    <p class="mt-3 mb-5 text-xl">Sign In to Continue</p>
+
+    <form method="post" class="border p-5 rounded-md bg-background">
+      {% csrf_token %}
+
+      <!-- Email Field -->
+      <div class="mb-4">
+        <label for="{{ form.email.id_for_label }}" class="block mb-1 text-sm font-medium">
+          {{ form.email.label }}
+          {% if form.email.field.required %}
+            <span class="text-red-500">*</span>
+          {% endif %}
+        </label>
+        {{ form.email|add_class:"w-full px-3 py-2 border rounded-md" }}
+        {% if form.email.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ form.email.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+      <!-- Password Field -->
+      <div class="mb-4">
+        <label for="{{ form.password.id_for_label }}" class="block mb-1 text-sm font-medium">
+          {{ form.password.label }}
+          {% if form.password.field.required %}
+            <span class="text-red-500">*</span>
+          {% endif %}
+        </label>
+
+        <div class="relative">
+          {{ form.password|add_class:"w-full px-3 py-2 border rounded-md pr-10" }}
+
+          <button type="button" onclick="togglePassword()" class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+            <img id="eyeOpen" src="{% static 'icons/eye.svg' %}" alt="Show" class="h-5 w-5">
+            <img id="eyeClosed" src="{% static 'icons/eye-close.svg' %}" alt="Hide" class="h-5 w-5 hidden">
+          </button>
+        </div>
+
+
+        {% if form.password.errors %}
+          <p class="text-red-500 text-sm mt-1">{{ form.password.errors.0 }}</p>
+        {% endif %}
+      </div>
+
+
+      <!-- Remember Me and Forgot Password -->
+      <div class="flex items-center justify-between mb-4">
+        <label class="inline-flex items-center space-x-2">
+          {{ form.remember_me|add_class:"w-4 h-4 text-primary bg-gray-400 border-primary rounded-sm" }}
+          <span class="text-sm text-primary">{{ form.remember_me.label }}</span>
+        </label>
+        <a href="{% url 'forget-password' %}" class="text-sm underline">Forgot Password?</a>
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="mb-5 w-full bg-primary rounded-md text-white hover:text-primary transition-all duration-200 py-2 hover:bg-primary-foreground border border-primary">
+        Sign In
+      </button>
+
+      <p>Don't have account? <a href="{% url 'signup' %}" class="underline font-medium">Sign Up</a></p>
+    </form>
+  </div>
+</main>
+<script>
+  function togglePassword() {
+    const input = document.getElementById('id_password');
+    const eyeOpen = document.getElementById('eyeOpen');
+    const eyeClosed = document.getElementById('eyeClosed');
+
+    const isPassword = input.type === 'password';
+    input.type = isPassword ? 'text' : 'password';
+
+    eyeOpen.classList.toggle('hidden', !isPassword);
+    eyeClosed.classList.toggle('hidden', isPassword);
+  }
+</script>
+{% endblock content %}

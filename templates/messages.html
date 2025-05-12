@@ -1,0 +1,37 @@
+{% load static %}
+{% if messages %}
+    <div id="toast-container" class="fixed top-4 right-4 space-y-2 z-50">
+        {% for message in messages %}
+        <div class="toast rounded-md flex items-center gap-2 px-4 py-3 shadow-md text-white 
+                    {% if message.tags == 'error' %}bg-red-500
+                    {% elif message.tags == 'success' %}bg-green-500
+                    {% elif message.tags == 'warning' %}bg-yellow-500 text-black
+                    {% else %}bg-blue-500{% endif %}"
+            data-toast
+        >   
+         <span>
+           {% if message.tags == 'error' %}<img src="{% static 'icons/error.svg' %}" alt="Error" class="w-6 h-6" />
+            {% elif message.tags == 'success' %}<img src="{% static 'icons/check.svg' %}" alt="Success" class="w-6 h-6" />
+            {% elif message.tags == 'warning' %}<img src="{% static 'icons/warning.svg' %}" alt="Warning" class="w-6 h-6" />
+            {% else %}<img src="{% static 'icons/info.svg' %}" alt="Info" class="w-6 h-6" />{% endif %}</span> <span>{{ message }}</span> 
+        </div>
+        {% endfor %}
+    </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const toasts = document.querySelectorAll('[data-toast]');
+        
+        toasts.forEach(toast => {
+            // Show animation
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-x-4');
+            }, 2500);
+            
+            // Remove after animation completes
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        });
+    });
+</script>
+{% endif %}
