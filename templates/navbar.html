@@ -1,6 +1,9 @@
 {% load static %}
 <nav class="bg-secondary sticky top-0 left-0 z-10 shadow-lg border-b border-border">
-  <div class="bg-primary flex items-center gap-2 py-2 text-white ps-[5vw] md:ps-[3vw] lg:ps-[12vw]"><img src="{% static 'icons/phone.svg' %}" alt="Facebook" class="w-4 h-4" /> <span>0123-456789</span></div>
+  <div class="bg-primary flex items-center gap-2 py-2 text-white ps-[5vw] md:ps-[3vw] lg:ps-[12vw]">
+    <img src="{% static 'icons/phone.svg' %}" alt="Facebook" class="w-4 h-4" />
+    <span>0123-456789</span>
+  </div>
   <div class="max-w-6xl px-4 mx-auto">
     <div class="flex justify-between">
       <!-- Logo -->
@@ -19,44 +22,45 @@
       <!-- Desktop Menu (right side) -->
       <div class="hidden md:flex items-center space-x-2">
         <!-- logout/signin start-->
-        {% if request.user.is_authenticated %}
-          {% include "logout.html" %}
+        {% if request.user.is_authenticated %} 
+        {% include "logout.html" %} 
         {% else %}
-          <a href="{% url 'signin' %}" class="py-4 px-3 text-foreground hover:text-primary transition-colors">Sign In</a>
+        <a href="{% url 'signin' %}" class="py-4 px-3 text-foreground hover:text-primary transition-colors">Sign In</a>
         {% endif %}
         <!-- logout/signin end-->
 
-        <!-- profile/hafeez start -->
+        <!-- profile/ustaz start -->
         {% if request.user.is_authenticated %}
-          <a href="{% url 'profile' %}" class="border border-primary rounded-full">
-            <div class="w-10 h-10 rounded-full overflow-hidden">
-              {% if request.user.avatar %}
-                <img src="{{ request.user.avatar.url }}" alt="avatar" class="w-full h-full object-cover" />
-              {% else %}
-                <div class="w-full h-full bg-slate-300"></div>
-              {% endif %}
-            </div>
-          </a>
+        <a href="{% url 'profile' %}" class="border border-primary rounded-full">
+          <div class="w-10 h-10 rounded-full overflow-hidden">
+            {% if request.user.avatar %}
+            <img src="{{ request.user.avatar.url }}" alt="avatar" class="w-full h-full object-cover" />
+            {% else %}
+            <div class="w-full h-full bg-slate-300"></div>
+            {% endif %}
+          </div>
+        </a>
         {% else %}
-          <a href="#" class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-background hover:text-primary border border-primary transition duration-300">
-            Become a Hafeez
-          </a>
+        <a href="{% url 'signup/ustaz' %}"
+          class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-background hover:text-primary border border-primary transition duration-300">
+          Become a Ustaz
+        </a>
         {% endif %}
-        <!-- profile/hafeez end -->
+        <!-- profile/ustaz end -->
       </div>
 
       <!-- Mobile menu button -->
       <div class="md:hidden flex gap-3 items-center">
         {% if request.user.is_authenticated %}
-          <a href="{% url 'profile' %}" class="border border-primary rounded-full">
-            <div class="w-8 h-8 rounded-full overflow-hidden">
-              {% if request.user.avatar %}
-                <img src="{{ request.user.avatar.url }}" alt="avatar" class="w-full h-full object-cover" />
-              {% else %}
-                <div class="w-full h-full bg-slate-300"></div>
-              {% endif %}
-            </div>
-          </a>
+        <a href="{% url 'profile' %}" class="border border-primary rounded-full">
+          <div class="w-8 h-8 rounded-full overflow-hidden">
+            {% if request.user.avatar %}
+            <img src="{{ request.user.avatar.url }}" alt="avatar" class="w-full h-full object-cover" />
+            {% else %}
+            <div class="w-full h-full bg-slate-300"></div>
+            {% endif %}
+          </div>
+        </a>
         {% endif %}
         <button class="outline-none mobile-menu-button" id="mobile-menu-button">
           <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -72,13 +76,17 @@
   <div class="hidden transition-all mobile-menu" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
       <!-- logout/signin start-->
-        {% if request.user.is_authenticated %}
-          {% include "logout.html" %}
-        {% else %}
-          <a href="{% url 'signin' %}" class="block px-3 py-2 text-foreground hover:text-primary border-t border-border transition-colors">Sign In</a>
-        {% endif %}
+      {% if request.user.is_authenticated %}
+      {% include "logout.html" %}
+      {% else %}
+      <a href="{% url 'signin' %}"
+        class="block px-3 py-2 text-foreground hover:text-primary border-t border-border transition-colors">Sign In</a>
+      {% endif %}
       <!-- logout/signin end-->
-      <a href="#" class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-background hover:text-primary border border-primary transition duration-300">Become a Hafeez</a>
+      <a href="{% url 'signup/ustaz' %}"
+        class="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-background hover:text-primary border border-primary transition duration-300">
+        Become a Ustaz
+      </a>
     </div>
   </div>
 </nav>
@@ -88,6 +96,6 @@
   const menu = document.getElementById("mobile-menu");
 
   btn.addEventListener("click", () => {
-      menu.classList.toggle("hidden");
+    menu.classList.toggle("hidden");
   });
 </script>

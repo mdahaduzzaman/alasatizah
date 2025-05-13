@@ -6,7 +6,6 @@ from accounts.models import User
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     confirm_password = forms.CharField(widget=forms.PasswordInput)
-    remember_me = forms.BooleanField(required=False)
     gender = forms.ChoiceField(choices=GenderChoices.choices, widget=forms.Select)
     phone = forms.CharField(
         widget=forms.TextInput(attrs={

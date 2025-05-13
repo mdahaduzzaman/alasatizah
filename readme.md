@@ -1,12 +1,12 @@
-# Alasatizah 
+# Alasatizah
 
-Alasatizah is a Django-based web application built for connecting **Organizations** with verified **Hafeez** across Bangladesh. It’s a secure, scalable platform that allows Hafeez to register, manage their profiles, and receive job opportunities from Organizations. Styled using **Tailwind CSS** for a clean and modern UI.
+Alasatizah is a Django-based web application built for connecting **Organizations** with verified **Ustaz** across Bangladesh. It’s a secure, scalable platform that allows Ustaz to register, manage their profiles, and receive job opportunities from Organizations. Styled using **Tailwind CSS** for a clean and modern UI.
 
 ## Features
 
-- 🔐 Secure registration and authentication for Hafeez and Organizations
-- 📄 Profile management and verification system for Hafeez
-- 🏢 Organization dashboard to post, manage, and hire Hafeez
+- 🔐 Secure registration and authentication for Ustaz and Organizations
+- 📄 Profile management and verification system for Ustaz
+- 🏢 Organization dashboard to post, manage, and hire Ustaz
 - 🔎 Advanced search and filtering options
 - 📩 Messaging or contact system between both parties
 - 🎨 Fully responsive UI using Tailwind CSS
@@ -36,31 +36,28 @@ Alasatizah is a Django-based web application built for connecting **Organization
    cd alasatizah
    ```
 2. **Create a virtual environment and activate it**
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
 3. **Install dependencies**
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 4. **Install frontend dependencies and build Tailwind CSS**
-    ```bash
-    npm install
-    npm run build
-    ```
+   ```bash
+   npm install
+   npm run build
+   ```
 5. **Apply migrations**
-    ```bash
-    python manage.py migrate
-    ```
+   ```bash
+   python manage.py migrate
+   ```
 6. **Create a superuser**
-    ```bash
-    python manage.py createsuperuser
-    ```
+   ```bash
+   python manage.py createsuperuser
+   ```
 7. **Run the development server**
-    ```bash
-    python manage.py runserver
-    ```
-
-
-
+   ```bash
+   python manage.py runserver
+   ```

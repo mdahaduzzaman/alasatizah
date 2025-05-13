@@ -9,3 +9,17 @@ class TimeStampedUUIDModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Address(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    city = models.CharField(max_length=50)
+    area = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.area}, {self.city}"
+
+    class Meta:
+        db_table = 'addresses'
+        verbose_name = 'Address'
+        verbose_name_plural = 'Addresses'

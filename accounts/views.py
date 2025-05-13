@@ -45,6 +45,7 @@ def signin_view(request):
                 request.session.set_expiry(0)  # Session expires on browser close
 
             # redirect to home page
+            messages.success(request, "Successfully logged in")
             return redirect('index')
         else:
             messages.error(request, "Invalid username or password")

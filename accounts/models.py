@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Group
 from django.core.validators import MinLengthValidator
+from django.core.files.storage import default_storage
 
 from accounts.choices import GenderChoices
 from accounts.managers import UserManager
@@ -45,4 +46,15 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedUUIDModel):
         return self.name
 
     class Meta:
-        db_table = "user"
+        db_table = "users"
+
+    def save(self, *args, **kwargs):
+        # Check if the instance already exists in the DB
+        if self.pk:
+            old_avatar = User.objects.filter(pk=self.pk).values_list("avatar", flat=True).first()
+            if old_avatar and self.avatar and old_avatar != self.avatar.name:
+                # Delete old avatar file
+                if default_storage.exists(old_avatar):
+                    default_storage.delete(old_avatar)
+
+        super().save(*args, **kwargs)
