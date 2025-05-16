@@ -52,6 +52,7 @@ class SignUpForm(forms.ModelForm):
             }
         )
     )
+    terms_condition = forms.BooleanField(required=True, initial=False)
 
     class Meta:
         model = User
@@ -59,6 +60,11 @@ class SignUpForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
+
+        terms_accepted = cleaned_data.get("terms_condition")
+        if not terms_accepted:
+            self.add_error("terms_condition", "You must accept the terms and conditions.")
+
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
         if password != confirm_password:
