@@ -2,17 +2,16 @@
   <div class="my-5 max-w-6xl px-4 mx-auto overflow-hidden">
     <div class="flex flex-col items-center">
       <h2 class="text-2xl text-center md:text-3xl lg:text-4xl font-semibold">
-        What Some Awesome Guardian/Student Says about Us
+        What Some Awesome Guardian/Student/Institution Says about Us
       </h2>
       <p class="text-sm md:text-[16px] lg:text-lg mt-5 mb-3">
         Hire a ustaz today and start learning!
       </p>
-      <button
-        class="relative mt-2 mb-3 py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition duration-300 animate-[wave-pulse_2s_infinite]"
-        style="--tw-shadow-color: rgb(var(--primary))"
+      <a href="{% url 'signup/organization' %}"
+        class="inline-block relative mt-2 mb-3 py-2 px-3 border border-primary bg-primary text-primary-foreground hover:text-primary rounded-lg hover:bg-background hover transition duration-300 animate-[wave-pulse_2s_infinite]"
       >
-        Hire a Ustaz
-      </button>
+        Hire a Ustaz Today
+      </a>
     </div>
 
     <!-- Carousel Wrapper -->

@@ -2,7 +2,9 @@
 {% block content %}
 <main class="">
   {% include "core/home/hero.html" %}
-  {% include "core/home/profile-choice.html" %}
+  {% if not request.user.is_authenticated %}
+    {% include "core/home/profile-choice.html" %}
+  {% endif%}
   {% include "core/home/tuition-types.html" %}
   {% include "core/home/how-works-for-organization.html" %}
   {% include "core/home/categories.html" %}
