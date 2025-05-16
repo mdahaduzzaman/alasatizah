@@ -168,3 +168,6 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # default signin url
 LOGIN_URL = "/accounts/signin/"
+
+
+SITE_TITLE = "Alasatizah Admin"

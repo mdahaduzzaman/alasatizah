@@ -1,0 +1,343 @@
+{% extends "_base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="bg-secondary">
+    <div class="max-w-6xl mx-auto">
+        <form method="post" novalidate class="rounded-md bg-background p-5" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- city Field -->
+            <div class="mb-4">
+                <label for="{{ address_form.city.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ address_form.city.label }}
+                    {% if address_form.city.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ address_form.city|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if address_form.city.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ address_form.city.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- area Field -->
+            <div class="mb-4">
+                <label for="{{ address_form.area.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ address_form.area.label }}
+                    {% if address_form.area.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ address_form.area|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if address_form.area.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ address_form.area.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- birth_date Field -->
+            <div class="mb-4">
+                <label for="{{ form.birth_date.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.birth_date.label }}
+                    {% if form.birth_date.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.birth_date|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.birth_date.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.birth_date.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- nid_no Field -->
+            <div class="mb-4">
+                <label for="{{ form.nid_no.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.nid_no.label }}
+                    {% if form.nid_no.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.nid_no|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.nid_no.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.nid_no.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- birth_certificate_no Field -->
+            <div class="mb-4">
+                <label for="{{ form.birth_certificate_no.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.birth_certificate_no.label }}
+                    {% if form.birth_certificate_no.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.birth_certificate_no|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.birth_certificate_no.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.birth_certificate_no.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- nid_front Field -->
+            <div class="mb-4">
+                <label for="{{ form.nid_front.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.nid_front.label }}
+                    {% if form.nid_front.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.nid_front|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.nid_front.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.nid_front.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- nid_back Field -->
+            <div class="mb-4">
+                <label for="{{ form.nid_back.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.nid_back.label }}
+                    {% if form.nid_back.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.nid_back|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.nid_back.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.nid_back.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- guardian_permission_letter Field -->
+            <div class="mb-4">
+                <label for="{{ form.guardian_permission_letter.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.guardian_permission_letter.label }}
+                    {% if form.guardian_permission_letter.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.guardian_permission_letter|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.guardian_permission_letter.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.guardian_permission_letter.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- chairman_certificate Field -->
+            <div class="mb-4">
+                <label for="{{ form.chairman_certificate.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.chairman_certificate.label }}
+                    {% if form.chairman_certificate.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.chairman_certificate|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.chairman_certificate.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.chairman_certificate.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- pledge Field -->
+            <div class="mb-4">
+                <label for="{{ form.pledge.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.pledge.label }}
+                    {% if form.pledge.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.pledge|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.pledge.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.pledge.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- teacher_appreciation Field -->
+            <div class="mb-4">
+                <label for="{{ form.teacher_appreciation.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.teacher_appreciation.label }}
+                    {% if form.teacher_appreciation.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.teacher_appreciation|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.teacher_appreciation.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.teacher_appreciation.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- education_files Field -->
+            <div class="mb-4">
+                <label for="{{ form.education_files.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.education_files.label }}
+                    {% if form.education_files.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.education_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.education_files.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.education_files.errors.0 }}</p>
+                {% endif %}
+                <div id="id_education_files_preview"></div>
+            </div>
+
+            <!-- training_files Field -->
+            <div class="mb-4">
+                <label for="{{ form.training_files.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.training_files.label }}
+                    {% if form.training_files.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.training_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.training_files.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.training_files.errors.0 }}</p>
+                {% endif %}
+                <div id="id_training_files_preview"></div>
+            </div>
+
+            <!-- achievement_files Field -->
+            <div class="mb-4">
+                <label for="{{ form.achievement_files.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.achievement_files.label }}
+                    {% if form.achievement_files.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.achievement_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.achievement_files.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.achievement_files.errors.0 }}</p>
+                {% endif %}
+                <div id="id_achievement_files_preview"></div>
+            </div>
+
+            <!-- testimonial_files Field -->
+            <div class="mb-4">
+                <label for="{{ form.testimonial_files.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.testimonial_files.label }}
+                    {% if form.testimonial_files.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.testimonial_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.testimonial_files.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.testimonial_files.errors.0 }}</p>
+                {% endif %}
+                <div id="id_testimonial_files_preview"></div>
+            </div>
+            <!-- Submit Button -->
+            <button type="submit"
+                class="mb-5 w-full bg-primary rounded-md text-white hover:text-primary transition-all duration-200 py-2 hover:bg-primary-foreground border border-primary">
+                Submit
+            </button>
+        </form>
+    </div>
+</main>
+<script>
+
+    function makeFileInputDynamic(fileInputId, previewGridId) {
+        const fileInput = document.getElementById(fileInputId);
+        const previewGrid = document.getElementById(previewGridId);
+
+        let selectedFiles = [];
+
+        if (!fileInput || !previewGrid) {
+            console.error(`Element with ID "${fileInputId}" (file input) or "${previewGridId}" (preview grid) not found.`);
+            return;
+        }
+
+        fileInput.addEventListener("change", (event) => {
+            const newFiles = Array.from(event.target.files);
+            // Append new files to the existing selected files
+            selectedFiles = [...selectedFiles, ...newFiles];
+            updatePreviews();
+        });
+        
+        // function to check whether the div needs the styling or not
+        function updatePreviewGridClass() {
+            if (selectedFiles.length > 0) {
+                previewGrid.className = "flex mt-4 flex-wrap gap-4";
+            } else {
+                previewGrid.className = "";
+            }
+        }
+
+
+        function updatePreviews() {
+            previewGrid.innerHTML = "";
+            updatePreviewGridClass()
+
+            console.log("fileInput.src", fileInput.src)
+            console.log("fileInput.value", fileInput.value)
+            console.log("fileInput", fileInput.files)
+            console.log("selectedFiles", selectedFiles)
+
+            selectedFiles.forEach((file, index) => {
+                const previewWrapper = document.createElement("div");
+                previewWrapper.className = "relative w-24 h-24 border rounded overflow-hidden";
+
+                // Create preview content
+                const ext = file.name.split('.').pop().toLowerCase();
+
+                if (file.type.startsWith("image/")) {
+                    const fileURL = URL.createObjectURL(file);
+                    const img = document.createElement("img");
+                    img.src = fileURL;
+                    img.className = "object-cover w-full h-full";
+                    previewWrapper.appendChild(img);
+                } else if (file.type === "application/pdf") {
+                    const icon = document.createElement("div");
+                    icon.className = "flex flex-col items-center justify-center w-full h-full text-gray-700 text-xs p-2";
+                    icon.innerHTML = `
+            <svg class="w-6 h-6 mb-1 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.5L11.5 2H6z"/>
+            </svg>
+            ${file.name.length > 12 ? file.name.slice(0, 12) + '...' : file.name}
+            `;
+                    previewWrapper.appendChild(icon);
+                }
+                // Add more conditions for other file types if needed
+
+                // Close button
+                const closeBtn = document.createElement("button");
+                closeBtn.innerHTML = "&times;";
+                closeBtn.className = "absolute top-1 right-1 bg-white text-red-600 text-xs w-5 h-5 flex items-center justify-center rounded-full shadow";
+                closeBtn.onclick = () => {
+                    selectedFiles.splice(index, 1);
+                    updateFileInput();
+                    updatePreviews();
+                };
+
+                previewWrapper.appendChild(closeBtn);
+                previewGrid.appendChild(previewWrapper);
+            });
+        }
+
+        function updateFileInput() {
+            // Create a new DataTransfer object to manipulate the file input
+            const dt = new DataTransfer();
+            selectedFiles.forEach(file => dt.items.add(file));
+            fileInput.files = dt.files;
+        }
+
+        // Initial call to update previews if there are already files (e.g., after setting programmatically)
+        updatePreviews();
+
+        // Return an object with access to selectedFiles if needed
+        return {
+            getSelectedFiles: () => [...selectedFiles],
+            addFilesProgrammatically: (files) => {
+                selectedFiles = [...selectedFiles, ...files];
+                updateFileInput();
+                updatePreviews();
+            },
+            clearFiles: () => {
+                selectedFiles = [];
+                updateFileInput();
+                updatePreviews();
+            }
+        };
+    }
+
+    const educationFileInput = makeFileInputDynamic("id_education_files", "id_education_files_preview");
+    const trainingFileInput = makeFileInputDynamic("id_training_files", "id_training_files_preview");
+    const achivementFileInput = makeFileInputDynamic("id_achievement_files", "id_achievement_files_preview");
+    const testimonialFileInput = makeFileInputDynamic("id_testimonial_files", "id_testimonial_files_preview");
+
+</script>
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% block title %}
+Terms and Condition | Alasatizah
+{% endblock title %}
+{% block content %}
+<main class="bg-secondary py-5 px-5 lg:px-10">
+    <div class="bg-background rounded-md p-5">
+        <h1 class="text-xl md:text-2xl lg:text-3xl font-semibold mb-5">Terms and Condition</h1>
+        <div class="space-y-5">
+            {% include "core/terms_condition/ustaz.html" %}
+            {% include "core/terms_condition/organization.html" %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

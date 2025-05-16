@@ -58,3 +58,8 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedUUIDModel):
                     default_storage.delete(old_avatar)
 
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.avatar and default_storage.exists(self.avatar.name):
+            default_storage.delete(self.avatar.name)
+        super().delete(*args, **kwargs)
