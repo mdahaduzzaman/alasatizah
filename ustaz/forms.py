@@ -10,14 +10,7 @@ from ustaz.models import (
     AchievementCertificate,
     OrganizationTestimonial,
 )
-from core.models import Address
 from alasatizah.forms.fields import MultipleFileField
-
-
-class AddressForm(forms.ModelForm):
-    class Meta:
-        model = Address
-        exclude = ["id"]
 
 
 class UstazForm(forms.ModelForm):
@@ -44,22 +37,26 @@ class UstazForm(forms.ModelForm):
 
     guardian_permission_letter = forms.FileField(
         widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True
+        required=True,
+        label="Guardian Permission Letter"
     )
 
     chairman_certificate = forms.FileField(
         widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True
+        required=True,
+        label="Chairman Certificate"
     )
 
     pledge = forms.FileField(
         widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True
+        required=True,
+        label="Pledge Document"
     )
 
     teacher_appreciation = forms.FileField(
         widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True
+        required=True,
+        label="Teacher Appreciation Document"
     )
 
     class Meta:
@@ -80,10 +77,6 @@ class UstazForm(forms.ModelForm):
             "birth_certificate_no": "Birth Certificate Number",
             "nid_front": "NID Front Image (if any)",
             "nid_back": "NID Back Image (if any)",
-            "guardian_permission_letter": "Guardian Permission Letter",
-            "chairman_certificate": "Chairman Certificate",
-            "pledge": "Pledge Document",
-            "teacher_appreciation": "Teacher Appreciation Document",
         }
 
     def clean(self):

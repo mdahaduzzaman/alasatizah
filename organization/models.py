@@ -53,7 +53,7 @@ class Organization(TimeStampedUUIDModel):
         verbose_name_plural = 'Organizations'
 
     def save(self, *args, **kwargs):
-        if self.pk:
+        if self._state.adding is False:
             old = Organization.objects.get(pk=self.pk)
 
             for field_name in [

@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from alasatizah.decorators.profile_required import anonymous_required, ustaz_required
 from accounts.forms import SignUpForm
 from accounts.models import Role, User
-from ustaz.forms import AddressForm, UstazForm
+from core.forms import AddressForm
+from ustaz.forms import UstazForm
 
 
 @anonymous_required
@@ -42,6 +43,8 @@ def uztaz_complete_profile_view(request):
 
         # Set the address before saving
         ustaz = form.save(address=address, user=request.user)
+
+        messages.success(request, "Successfully completed your ustaz profile")
 
         # redirect to home page
         return redirect("index")
