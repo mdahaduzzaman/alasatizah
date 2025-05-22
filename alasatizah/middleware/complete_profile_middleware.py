@@ -8,6 +8,7 @@ class CompleteProfileMiddleware:
         "/sign-in/",
         "/signup/ustaz/",
         "/signup/organization/",
+        "/signup/guardian/",
         "/logout/",
         "/terms-condition/",
     }
@@ -44,5 +45,10 @@ class CompleteProfileMiddleware:
         if user.roles.filter(name="organization").exists() and not hasattr(user, 'organization'):
             if not path.startswith(reverse("organization/complete-profile")):
                 return redirect("organization/complete-profile")
+
+        # Redirect guardian if profile is not complete
+        if user.roles.filter(name="guardian").exists() and not hasattr(user, 'guardian'):
+            if not path.startswith(reverse("guardian/complete-profile")):
+                return redirect("guardian/complete-profile")
 
         return self.get_response(request)

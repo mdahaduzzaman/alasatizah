@@ -1,0 +1,29 @@
+{% load widget_tweaks %}
+
+<!-- city Field -->
+<div class="mb-4">
+    <label for="{{ address_form.city.id_for_label }}" class="block mb-1 text-sm font-medium">
+        {{ address_form.city.label }}
+        {% if address_form.city.field.required %}
+        <span class="text-red-500">*</span>
+        {% endif %}
+    </label>
+    {{ address_form.city|add_class:"w-full px-3 py-2 border rounded-md" }}
+    {% if address_form.city.errors %}
+    <p class="text-red-500 text-sm mt-1">{{ address_form.city.errors.0 }}</p>
+    {% endif %}
+</div>
+
+<!-- area Field -->
+<div class="mb-4">
+    <label for="{{ address_form.area.id_for_label }}" class="block mb-1 text-sm font-medium">
+        {{ address_form.area.label }}
+        {% if address_form.area.field.required %}
+        <span class="text-red-500">*</span>
+        {% endif %}
+    </label>
+    {{ address_form.area|add_class:"w-full px-3 py-2 border rounded-md" }}
+    {% if address_form.area.errors %}
+    <p class="text-red-500 text-sm mt-1">{{ address_form.area.errors.0 }}</p>
+    {% endif %}
+</div>

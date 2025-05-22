@@ -3,7 +3,7 @@
 <main class="">
   {% include "core/home/hero.html" %}
   {% if not request.user.is_authenticated %}
-    {% include "core/home/profile-choice.html" %}
+    {% include "profile-choice.html" %}
   {% endif%}
   {% include "core/home/tuition-types.html" %}
   {% include "core/home/how-works-for-organization.html" %}

@@ -25,6 +25,7 @@ urlpatterns = [
     path("", include("accounts.urls")),
     path("", include("ustaz.urls")),
     path("", include("organization.urls")),
+    path("", include("guardian.urls")),
 ]
 
 if settings.DEBUG:

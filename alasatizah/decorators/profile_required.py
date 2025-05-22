@@ -32,3 +32,14 @@ def organization_required(view_func):
         return redirect("index")
 
     return _wrapped_view
+
+
+def guardian_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        user = request.user
+        if user.is_authenticated and user.roles.filter(name="guardian").exists():
+            return view_func(request, *args, **kwargs)
+        return redirect("index")
+
+    return _wrapped_view

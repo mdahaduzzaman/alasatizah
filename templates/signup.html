@@ -6,6 +6,8 @@
     <h1 class="mb-3 text-4xl text-primary font-medium">
       {% if request.path == '/signup/ustaz/' %}
       Ustaz Sign Up
+      {% elif request.path == '/signup/guardian/' %}
+      Guardian/Student Sign Up
       {% else %}
       Organization Sign Up
       {% endif %}
@@ -153,9 +155,11 @@
         {% endif %}
         <div id="terms_condition_wrapper" class="mt-5">
           {% if request.path == '/signup/ustaz/' %}
-          {% include "core/terms_condition/ustaz.html" %}
+            {% include "core/terms_condition/ustaz.html" %}
+          {% elif request.path == '/signup/guardian/' %}
+            {% include "core/terms_condition/guardian.html" %}
           {% else %}
-          {% include "core/terms_condition/organization.html" %}
+            {% include "core/terms_condition/organization.html" %}
           {% endif %}
         </div>
       </div>

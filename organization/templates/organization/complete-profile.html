@@ -9,33 +9,8 @@
         <form method="post" class="rounded-md bg-background p-5" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <!-- name Field -->
-            <div class="mb-4">
-                <label for="{{ form.name.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.name.label }}
-                    {% if form.name.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.name|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.city.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- email Field -->
-            <div class="mb-4">
-                <label for="{{ form.email.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.email.label }}
-                    {% if form.email.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.email|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.email.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.email.errors.0 }}</p>
-                {% endif %}
-            </div>
+            <!-- including address form -->
+            {% include 'address-form.html' %}
 
             <!-- city Field -->
             <div class="mb-4">
