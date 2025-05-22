@@ -26,6 +26,7 @@ urlpatterns = [
     path("", include("ustaz.urls")),
     path("", include("organization.urls")),
     path("", include("guardian.urls")),
+    path("", include("posts.urls")),
 ]
 
 if settings.DEBUG:

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "ustaz",
     "organization",
     "guardian",
+    "posts",
 ]
 
 MIDDLEWARE = [

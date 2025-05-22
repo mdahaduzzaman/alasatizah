@@ -41,7 +41,7 @@ def guardian_complete_profile_view(request):
         address = address_form.save()
 
         # Set the address before saving
-        guardian = Guardian.objects.create(address=address, user=request.user)
+        guardian = Guardian.objects.create(address=address, user=request.user, is_verified = True)
 
         messages.success(request, "Successfully completed your guardian or student profile")
 

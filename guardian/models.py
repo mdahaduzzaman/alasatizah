@@ -7,6 +7,7 @@ from core.models import Address, TimeStampedUUIDModel
 class Guardian(TimeStampedUUIDModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='guardian')
     address = models.OneToOneField(Address, on_delete=models.PROTECT)
+    is_verified = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'guardians'
