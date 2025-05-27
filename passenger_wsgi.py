@@ -1,0 +1,1 @@
+from alasatizah.wsgi import application
