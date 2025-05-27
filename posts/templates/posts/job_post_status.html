@@ -1,0 +1,16 @@
+{% if job_post.status == 'published' %}
+<span
+    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800 mt-1">
+    {{ job_post.get_status_display }}
+</span>
+{% elif job_post.status == 'drafted' %}
+<span
+    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800 mt-1">
+    {{ job_post.get_status_display }}
+</span>
+{% else %}
+<span
+    class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800 mt-1">
+    {{ job_post.get_status_display }}
+</span>
+{% endif %}

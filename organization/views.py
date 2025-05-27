@@ -38,9 +38,6 @@ def organization_complete_profile_view(request):
     form = OrganizationForm(request.POST or None, request.FILES or None, user=request.user)
     address_form = AddressForm(request.POST or None, request.FILES or None)
 
-    print("data", request.POST)
-    print("files", request.FILES)
-
     if request.method == "POST" and form.is_valid() and address_form.is_valid():
         address = address_form.save()
 
@@ -49,6 +46,6 @@ def organization_complete_profile_view(request):
         
         messages.success(request, "Successfully completed your organization profile")
         # redirect to home page
-        return redirect("index")
-    print("errors", form.errors)
+        return redirect("my_job_posts")
+
     return render(request, "organization/complete-profile.html", {"form": form, "address_form": address_form})

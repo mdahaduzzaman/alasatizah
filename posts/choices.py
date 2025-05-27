@@ -2,6 +2,7 @@ from django.db import models
 
 
 class JobTimeChoices(models.TextChoices):
+    ANY = "any", "Any"
     FULL_TIME = "full_time", "Full Time"
     PART_TIME = "part_time", "Part Time"
 
@@ -13,6 +14,7 @@ class JobStatusChoices(models.TextChoices):
 
 
 class JobTypeChoices(models.TextChoices):
+    ANY = "any", "Any"
     ONLINE = "online", "Online"
     HOME_TUTORING = "home_tutoring", "Home Tutoring"
     INSTITUTE = "institute", "At Institute"

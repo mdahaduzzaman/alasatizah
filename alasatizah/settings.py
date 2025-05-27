@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     "posts",
 ]
 
+if DEBUG:
+    INSTALLED_APPS.append("debug_toolbar")
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -57,6 +60,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "alasatizah.middleware.complete_profile_middleware.CompleteProfileMiddleware",
 ]
+
+if DEBUG:
+    MIDDLEWARE.insert(0, "debug_toolbar.middleware.DebugToolbarMiddleware")
 
 ROOT_URLCONF = "alasatizah.urls"
 
@@ -169,7 +175,7 @@ AUTH_USER_MODEL = "accounts.User"
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 
 # default signin url
-LOGIN_URL = "/accounts/signin/"
+LOGIN_URL = "/sign-in/"
 
 
 SITE_TITLE = "Alasatizah Admin"
@@ -183,3 +189,8 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 PASSWORD_RESET_TIMEOUT = 30 * 60
+
+# DEBUG TOOLBAR CONFIGURATION
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

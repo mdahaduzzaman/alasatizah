@@ -46,6 +46,6 @@ def guardian_complete_profile_view(request):
         messages.success(request, "Successfully completed your guardian or student profile")
 
         # redirect to home page
-        return redirect("index")
+        return redirect("my_job_posts")
 
     return render(request, "guardian/complete-profile.html", {"address_form": address_form})

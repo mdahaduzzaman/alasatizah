@@ -1,8 +1,10 @@
 from django.db import models
 from django.core.files.storage import default_storage
+from django.contrib.contenttypes.fields import GenericRelation
 
 from accounts.models import User
 from core.models import TimeStampedUUIDModel, Address
+from posts.models import JobPost
 
 
 class Organization(TimeStampedUUIDModel):
@@ -45,6 +47,7 @@ class Organization(TimeStampedUUIDModel):
     committee_permission = models.ImageField(upload_to=cp_upload_path, null=True, blank=True)
     pledge = models.ImageField(upload_to=pledge_upload_path, null=True, blank=True)
     is_verified = models.BooleanField(default=False)
+    job_posts = GenericRelation(JobPost, related_query_name='guardian')
 
     class Meta:
         db_table = 'organizations'

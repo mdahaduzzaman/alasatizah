@@ -47,6 +47,6 @@ def uztaz_complete_profile_view(request):
         messages.success(request, "Successfully completed your ustaz profile")
 
         # redirect to home page
-        return redirect("index")
+        return redirect("my_job_requests")
 
     return render(request, "ustaz/complete-profile.html", {"form": form, "address_form": address_form})

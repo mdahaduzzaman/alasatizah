@@ -46,7 +46,7 @@ class JobPost(TimeStampedUUIDModel):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.content_object
+        return self.title
     
     @property
     def job_number(self) -> str:
@@ -67,12 +67,12 @@ class UstazJobRequest(TimeStampedUUIDModel):
     job_time = models.CharField(
         max_length=50,
         choices=JobTimeChoices.choices,
-        default=JobTimeChoices.PART_TIME,
+        default=JobTimeChoices.ANY,
     )
     job_type = models.CharField(
         max_length=50,
         choices=JobTypeChoices.choices,
-        default=JobTypeChoices.HOME_TUTORING,
+        default=JobTypeChoices.ANY,
     )
     tuition_time = models.CharField(
         max_length=100,
@@ -91,4 +91,4 @@ class UstazJobRequest(TimeStampedUUIDModel):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"{self.ustaz.user} - {self.title}"
+        return self.title

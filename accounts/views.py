@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 
 from alasatizah.decorators.profile_required import anonymous_required
 from accounts.forms import ProfileForm, SignInForm, SignUpForm
@@ -46,6 +47,10 @@ def signin_view(request):
 
             # redirect to home page
             messages.success(request, "Successfully logged in")
+            if request.user.roles.filter(name="ustaz").exists():
+                return redirect('my_job_requests')
+            if request.user.roles.filter(Q(name="organization") | Q(name="guardian")).exists():
+                return redirect('my_job_posts')
             return redirect('index')
         else:
             messages.error(request, "Invalid username or password")

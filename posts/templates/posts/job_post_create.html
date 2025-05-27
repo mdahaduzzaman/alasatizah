@@ -1,0 +1,190 @@
+{% extends "_base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<main class="bg-secondary">
+    <div class="max-w-6xl mx-auto py-10">
+        <h1 class="mb-3 text-2xl md:text-3xl lg:text-4xl text-primary font-medium">{% if job_post %}Update{% else %}Create a{% endif %} Job Post</h1>
+        <form method="post" class="rounded-md bg-background p-5">
+            {% csrf_token %}
+            <!-- including address form -->
+            {% include 'address-form.html' %}
+            
+            <!-- title Field -->
+            <div class="mb-4">
+                <label for="{{ form.title.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.title.label }}
+                    {% if form.title.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.title|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.title.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.title.help_text }}</p>
+                {% endif %}
+                {% if form.title.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.title.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- description Field -->
+            <div class="mb-4">
+                <label for="{{ form.description.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.description.label }}
+                    {% if form.description.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.description|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.description.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.description.help_text }}</p>
+                {% endif %}
+                {% if form.description.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.description.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- salary Field -->
+            <div class="mb-4">
+                <label for="{{ form.salary.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.salary.label }}
+                    {% if form.salary.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.salary|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.salary.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.salary.help_text }}</p>
+                {% endif %}
+                {% if form.salary.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.salary.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- job_time Field -->
+            <div class="mb-4">
+                <label for="{{ form.job_time.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.job_time.label }}
+                    {% if form.job_time.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.job_time|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.job_time.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.job_time.help_text }}</p>
+                {% endif %}
+                {% if form.job_time.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.job_time.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- job_type Field -->
+            <div class="mb-4">
+                <label for="{{ form.job_type.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.job_type.label }}
+                    {% if form.job_type.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.job_type|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.job_type.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.job_type.help_text }}</p>
+                {% endif %}
+                {% if form.job_type.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.job_type.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- tuition_time Field -->
+            <div class="mb-4">
+                <label for="{{ form.tuition_time.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.tuition_time.label }}
+                    {% if form.tuition_time.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.tuition_time|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.tuition_time.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.tuition_time.help_text }}</p>
+                {% endif %}
+                {% if form.tuition_time.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.tuition_time.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- deadline Field -->
+            <div class="mb-4">
+                <label for="{{ form.deadline.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.deadline.label }}
+                    {% if form.deadline.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.deadline|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.deadline.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.deadline.help_text }}</p>
+                {% endif %}
+                {% if form.deadline.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.deadline.errors.0 }}</p>
+                {% endif %}
+            </div>
+            
+            <!-- subjects Field -->
+            <div class="mb-4">
+                <label for="{{ form.subjects.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.subjects.label }}
+                    {% if form.subjects.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.subjects|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.subjects.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.subjects.help_text }}</p>
+                {% endif %}
+                {% if form.subjects.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.subjects.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- ustaz_type Field -->
+            <div class="mb-4">
+                <label for="{{ form.ustaz_type.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.ustaz_type.label }}
+                    {% if form.ustaz_type.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.ustaz_type|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.ustaz_type.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.ustaz_type.help_text }}</p>
+                {% endif %}
+                {% if form.ustaz_type.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.ustaz_type.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- status Field -->
+            <div class="mb-4">
+                <label for="{{ form.status.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.status.label }}
+                    {% if form.status.field.required %}
+                    <span class="text-red-500">*</span>
+                    {% endif %}
+                </label>
+                {{ form.status|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.status.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.status.help_text }}</p>
+                {% endif %}
+                {% if form.status.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.status.errors.0 }}</p>
+                {% endif %}
+            </div>
+            <!-- Submit Button -->
+            <button type="submit"
+                class="mb-5 w-full bg-primary rounded-md text-white hover:text-primary transition-all duration-200 py-2 hover:bg-primary-foreground border border-primary">
+                {% if job_post %}Update{% else %}Create{% endif %} Job Post
+            </button>
+        </form>
+    </div>
+</main>
+{% endblock %}

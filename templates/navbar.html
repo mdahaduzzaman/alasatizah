@@ -20,13 +20,15 @@
       </div>
 
       <!-- Desktop Menu (right side) -->
-      <div class="hidden md:flex items-center space-x-2">
+      <div class="hidden md:flex items-center space-x-1">
         <!-- logout/signin start-->
         {% if request.user.is_authenticated %} 
         {% include "logout.html" %} 
         {% else %}
         <a href="{% url 'signin' %}" class="py-4 px-3 text-foreground hover:text-primary transition-colors">Sign In</a>
         {% endif %}
+        <a href="{% url 'job_post_list' %}" class="py-4 px-3 text-foreground hover:text-primary transition-color pr-5">Job Posts</a>
+
         <!-- logout/signin end-->
 
         <!-- profile/ustaz start -->
@@ -76,6 +78,7 @@
   <div class="hidden transition-all mobile-menu" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col">
       <!-- logout/signin start-->
+      <a href="{% url 'job_post_list' %}" class="py-2 text-foreground hover:text-primary transition-color pr-5">Job Posts</a>
       {% if request.user.is_authenticated %}
       {% include "logout.html" %}
       {% else %}
