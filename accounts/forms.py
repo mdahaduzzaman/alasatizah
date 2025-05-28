@@ -57,6 +57,9 @@ class SignUpForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ["name", "email", "phone", "avatar", "gender"]
+        labels = {
+            "avatar": "Profile Picture",
+        }
 
     def clean(self):
         cleaned_data = super().clean()
@@ -102,4 +105,7 @@ class ProfileForm(forms.ModelForm):
                     "class": "block w-full border px-3 py-1 rounded-md",
                 }
             ),
+        }
+        labels = {
+            "avatar": "Profile Picture",
         }
