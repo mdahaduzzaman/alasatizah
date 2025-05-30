@@ -1,3 +1,4 @@
+{% load static %}
 <section class="min-h-[400px] md:h-[500px] bg-background py-10 md:py-0">
   <div
     class="container px-4 mx-auto flex flex-col md:flex-row items-center justify-between gap-5 md:gap-10"
@@ -21,6 +22,8 @@
     </div>
     <div
       class="w-full md:flex-1 h-[250px] sm:h-[350px] md:h-[400px] bg-primary mb-6 md:mb-0"
-    ></div>
+    >
+      <img src="{% static 'images/quran.jpeg' %}" alt="Al-Quran" class="w-full h-full">
+    </div>
   </div>
 </section>
