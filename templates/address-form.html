@@ -1,16 +1,19 @@
 {% load widget_tweaks %}
 
-<!-- city Field -->
+<!-- house Field -->
 <div class="mb-4">
-    <label for="{{ address_form.city.id_for_label }}" class="block mb-1 text-sm font-medium">
-        {{ address_form.city.label }}
-        {% if address_form.city.field.required %}
+    <label for="{{ address_form.house.id_for_label }}" class="block mb-1 text-sm font-medium">
+        {{ address_form.house.label }}
+        {% if address_form.house.field.required %}
         <span class="text-red-500">*</span>
         {% endif %}
     </label>
-    {{ address_form.city|add_class:"w-full px-3 py-2 border rounded-md" }}
-    {% if address_form.city.errors %}
-    <p class="text-red-500 text-sm mt-1">{{ address_form.city.errors.0 }}</p>
+    {{ address_form.house|add_class:"w-full px-3 py-2 border rounded-md" }}
+    {% if address_form.house.help_text %}
+    <p class="mt-1 text-sm text-gray-500">{{ address_form.house.help_text }}</p>
+    {% endif %}
+    {% if address_form.house.errors %}
+    <p class="text-red-500 text-sm mt-1">{{ address_form.house.errors.0 }}</p>
     {% endif %}
 </div>
 
@@ -23,7 +26,27 @@
         {% endif %}
     </label>
     {{ address_form.area|add_class:"w-full px-3 py-2 border rounded-md" }}
+    {% if address_form.area.help_text %}
+    <p class="mt-1 text-sm text-gray-500">{{ address_form.area.help_text }}</p>
+    {% endif %}
     {% if address_form.area.errors %}
     <p class="text-red-500 text-sm mt-1">{{ address_form.area.errors.0 }}</p>
+    {% endif %}
+</div>
+
+<!-- city Field -->
+<div class="mb-4">
+    <label for="{{ address_form.city.id_for_label }}" class="block mb-1 text-sm font-medium">
+        {{ address_form.city.label }}
+        {% if address_form.city.field.required %}
+        <span class="text-red-500">*</span>
+        {% endif %}
+    </label>
+    {{ address_form.city|add_class:"w-full px-3 py-2 border rounded-md" }}
+    {% if address_form.city.help_text %}
+    <p class="mt-1 text-sm text-gray-500">{{ address_form.city.help_text }}</p>
+    {% endif %}
+    {% if address_form.city.errors %}
+    <p class="text-red-500 text-sm mt-1">{{ address_form.city.errors.0 }}</p>
     {% endif %}
 </div>

@@ -49,8 +49,11 @@ class SignUpForm(forms.ModelForm):
                 "inputmode": "numeric",
                 "pattern": "[0-9]*",
                 "oninput": "this.value = this.value.replace(/[^0-9]/g, '')",
+                "placeholder": "Enter your phone number"
             }
-        )
+        ),
+        max_length=11,
+        min_length=11
     )
     terms_condition = forms.BooleanField(required=True, initial=False)
 
@@ -59,6 +62,11 @@ class SignUpForm(forms.ModelForm):
         fields = ["name", "email", "phone", "avatar", "gender"]
         labels = {
             "avatar": "Profile Picture",
+            "name": "Full Name"
+        }
+        widgets = {
+            "name": forms.TextInput(attrs={"placeholder": "Enter your full name"}),
+            "email": forms.EmailInput(attrs={"placeholder": "Enter your email address"}),
         }
 
     def clean(self):

@@ -8,7 +8,6 @@ from ustaz.models import (
     EducationalQualification,
     TrainingCertificate,
     AchievementCertificate,
-    OrganizationTestimonial,
 )
 from alasatizah.forms.fields import MultipleFileField
 
@@ -16,7 +15,7 @@ from alasatizah.forms.fields import MultipleFileField
 class UstazForm(forms.ModelForm):
     education_files = MultipleFileField(
         required=False,
-        label="Educational Qualification Documents (Upload multiple files if available)",
+        label="Educational Certificates (Upload multiple files if available)",
     )
 
     training_files = MultipleFileField(
@@ -29,54 +28,21 @@ class UstazForm(forms.ModelForm):
         label="Achievement Certificates (Upload multiple files if available)",
     )
 
-    testimonial_files = MultipleFileField(
-        required=False,
-        label="Organization Testimonials (Upload multiple files if available)",
-    )
     birth_date = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
-
-    guardian_permission_letter = forms.FileField(
-        widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True,
-        label="Guardian Permission Letter"
-    )
-
-    chairman_certificate = forms.FileField(
-        widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True,
-        label="Chairman Certificate"
-    )
-
-    pledge = forms.FileField(
-        widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True,
-        label="Pledge Document"
-    )
-
-    teacher_appreciation = forms.FileField(
-        widget=forms.FileInput(attrs={"accept": "image/*,.pdf"}),
-        required=True,
-        label="Teacher Appreciation Document"
-    )
 
     class Meta:
         model = Ustaz
         fields = [
             "nid_no",
             "birth_date",
-            "birth_certificate_no",
             "nid_front",
-            "nid_back",
-            "guardian_permission_letter",
-            "chairman_certificate",
-            "pledge",
-            "teacher_appreciation",
         ]
         labels = {
-            "nid_no": "National ID Number (if age more than 18 years)",
-            "birth_certificate_no": "Birth Certificate Number",
-            "nid_front": "NID Front Image (if any)",
-            "nid_back": "NID Back Image (if any)",
+            "nid_no": "National ID Number/Birth Registration Number",
+            "nid_front": "NID/Birth Registration attachment",
+        }
+        help_texts = {
+            "nid_front": "Please upload a clear copy of your National ID or Birth Registration certificate.",
         }
 
     def clean(self):
@@ -133,10 +99,5 @@ class UstazForm(forms.ModelForm):
         achievement_files = self.files.getlist("achievement_files")
         for file in achievement_files:
             AchievementCertificate.objects.create(ustaz=ustaz, file=file)
-
-        # Handle multiple testimonial files
-        testimonial_files = self.files.getlist("testimonial_files")
-        for file in testimonial_files:
-            OrganizationTestimonial.objects.create(ustaz=ustaz, file=file)
 
         return ustaz

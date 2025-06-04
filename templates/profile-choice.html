@@ -1,171 +1,240 @@
 <div class="bg-blue-100">
-    <div class="max-w-6xl mx-auto">
-        <div class="container mx-auto px-4 py-12">
-            <!-- Header -->
-            <div class="text-center mb-12">
-                <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                    Select Your Profile
-                </h1>
-                <p class="text-gray-600 max-w-2xl mx-auto">
-                    Please select your profile type to continue. This helps us provide you
-                    with the best experience.
-                </p>
+  <div class="max-w-6xl mx-auto">
+    <div class="container mx-auto px-4 py-12">
+      <!-- Header -->
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+          Select Your Profile
+        </h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">
+          Please select your profile type to continue. This helps us provide you
+          with the best experience.
+        </p>
+      </div>
+
+      <!-- Cards Section -->
+      <div class="flex flex-col lg:flex-row justify-center gap-8">
+        <!-- Tutor Card -->
+        <div
+          class="bg-background rounded-xl shadow-md overflow-hidden flex-1 max-w-md mx-auto lg:mx-0"
+        >
+          <div class="p-8">
+            <div class="flex justify-center mb-6">
+              <div class="bg-blue-100 p-4 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-primary"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
             </div>
-
-            <!-- Cards Section -->
-            <div class="flex flex-col lg:flex-row justify-center gap-8">
-                <!-- Tutor Card -->
-                <div class="bg-background rounded-xl shadow-md overflow-hidden flex-1 max-w-md mx-auto lg:mx-0">
-                    <div class="p-8">
-                        <div class="flex justify-center mb-6">
-                            <div class="bg-blue-100 p-4 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-primary" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                </svg>
-                            </div>
-                        </div>
-                        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
-                            Register as Ustaz
-                        </h2>
-                        <p class="text-gray-600 text-center mb-6">
-                            Join our platform as a ustaz and share your knowledge with students.
-                            Create your ustaz profile to start teaching.
-                        </p>
-                        <ul class="space-y-2 mb-8">
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Set your own schedule</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Connect with students</span>
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <a href="{% url 'signup/ustaz' %}"
-                                class="inline-block w-[250px] py-2 px-6 border border-primary bg-primary text-primary-foreground hover:text-primary rounded-lg hover:bg-background transition-all duration-200">
-                                Sign Up
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Organization Card -->
-                <div class="bg-background rounded-xl shadow-md overflow-hidden flex-1 max-w-md mx-auto lg:mx-0">
-                    <div class="p-8">
-                        <div class="flex justify-center mb-6">
-                            <div class="bg-purple-100 p-4 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-purple-600" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                                </svg>
-                            </div>
-                        </div>
-                        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
-                            Register as Institute
-                        </h2>
-                        <p class="text-gray-600 text-center mb-6">
-                            Join as an educational institution or organization to manage ustaz
-                            and students on our platform.
-                        </p>
-                        <ul class="space-y-2 mb-8">
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Manage multiple ustaz</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Track student progress</span>
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <a href="{% url 'signup/organization' %}"
-                                class="inline-block w-[250px] py-2 px-6 border border-purple-600 bg-purple-600 text-primary-foreground hover:text-purple-600 rounded-lg hover:bg-background transition-all duration-200">
-                                Sign Up
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Guardian/Student Card -->
-                <div class="bg-background rounded-xl shadow-md overflow-hidden flex-1 max-w-md mx-auto lg:mx-0">
-                    <div class="p-8">
-                        <div class="flex justify-center mb-6">
-                            <div class="bg-blue-100 p-4 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                            </div>
-                        </div>
-                        <h2 class="text-2xl font-bold text-center text-gray-800 mb-4">
-                            Register as Guardian/Student
-                        </h2>
-                        <p class="text-gray-600 text-center mb-6">
-                            Join as a guardian or student to access quality Islamic education and track your learning progress.
-                        </p>
-                        <ul class="space-y-2 mb-8">
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Access qualified ustaz</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Monitor learning progress</span>
-                            </li>
-                            <li class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2"
-                                    viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                                <span class="text-gray-700">Flexible learning schedule</span>
-                            </li>
-                        </ul>
-                        <div class="text-center">
-                            <a href="{% url 'signup/guardian' %}"
-                                class="inline-block w-[250px] py-2 px-6 border border-blue-600 bg-blue-600 text-primary-foreground hover:text-blue-600 rounded-lg hover:bg-background transition-all duration-200">
-                                Sign Up
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="text-xl font-bold text-center text-gray-800 mb-4">
+              Join as Ustaz
+            </h2>
+            <p class="text-gray-600 text-center mb-6">
+              Join our platform as a ustaz and share your knowledge with
+              students. Create your ustaz profile to start teaching.
+            </p>
+            <ul class="space-y-2 mb-8">
+              <li class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-green-500 mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-gray-700">Set your own schedule</span>
+              </li>
+              <li class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-green-500 mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-gray-700">Connect with students</span>
+              </li>
+            </ul>
+            <div class="text-center">
+              <a
+                href="{% url 'signup/ustaz' %}"
+                class="inline-block w-[250px] py-2 px-6 border border-primary bg-primary text-primary-foreground hover:text-primary rounded-lg hover:bg-background transition-all duration-200"
+              >
+                Sign Up
+              </a>
             </div>
+          </div>
         </div>
+
+        <!-- Institute Card -->
+        <div
+          class="bg-background rounded-xl shadow-md overflow-hidden flex-1 max-w-md mx-auto lg:mx-0"
+        >
+          <div class="p-8">
+            <div class="flex justify-center mb-6">
+              <div class="bg-purple-100 p-4 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-purple-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h2 class="text-xl font-bold text-center text-gray-800 mb-4">
+              Join as Institute
+            </h2>
+            <p class="text-gray-600 text-center mb-6">
+              Join as an educational institution or institute to manage ustaz
+              and students on our platform.
+            </p>
+            <ul class="space-y-2 mb-8">
+              <li class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-green-500 mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-gray-700">Manage multiple ustaz</span>
+              </li>
+              <li class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-green-500 mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-gray-700">Track student progress</span>
+              </li>
+            </ul>
+            <div class="text-center">
+              <a
+                href="{% url 'signup/organization' %}"
+                class="inline-block w-[250px] py-2 px-6 border border-purple-600 bg-purple-600 text-primary-foreground hover:text-purple-600 rounded-lg hover:bg-background transition-all duration-200"
+              >
+                Sign Up
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guardian/Student Card -->
+        <div
+          class="bg-background rounded-xl shadow-md overflow-hidden flex-1 max-w-md mx-auto lg:mx-0"
+        >
+          <div class="p-8">
+            <div class="flex justify-center mb-6">
+              <div class="bg-blue-100 p-4 rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-10 w-10 text-blue-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <h2
+              class="text-xl font-bold text-center text-gray-800 mb-4 text-nowrap"
+            >
+              Join as Guardian/Student
+            </h2>
+            <p class="text-gray-600 text-center mb-6">
+              Join as a guardian or student to access quality Islamic education
+              and track your learning progress.
+            </p>
+            <ul class="space-y-2 mb-8">
+              <li class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-green-500 mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-gray-700">Access qualified ustaz</span>
+              </li>
+              <li class="flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5 text-green-500 mr-2"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
+                <span class="text-gray-700">Monitor learning progress</span>
+              </li>
+            </ul>
+            <div class="text-center">
+              <a
+                href="{% url 'signup/guardian' %}"
+                class="inline-block w-[250px] py-2 px-6 border border-blue-600 bg-blue-600 text-primary-foreground hover:text-blue-600 rounded-lg hover:bg-background transition-all duration-200"
+              >
+                Sign Up
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

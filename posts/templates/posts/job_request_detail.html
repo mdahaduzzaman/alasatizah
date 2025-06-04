@@ -81,6 +81,9 @@
                                 Location
                             </h3>
                             <p class="mt-1 text-gray-700">
+                                {% if job_post.address.house %} 
+                                    {{ job_post.address.house }}, 
+                                {% endif %}
                                 {{ job_post.address.area }},
                                 {{ job_post.address.city }}
                             </p>

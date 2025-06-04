@@ -5,7 +5,6 @@ from ustaz.models import (
     Ustaz,
     AchievementCertificate,
     EducationalQualification,
-    OrganizationTestimonial,
     TrainingCertificate,
 )
 
@@ -24,13 +23,6 @@ class AchievementCertificateInline(admin.TabularInline):
     readonly_fields = []
 
 
-class OrganizationTestimonialInline(admin.TabularInline):
-    model = OrganizationTestimonial
-    extra = 0
-    fields = ["file", "is_verified"]
-    readonly_fields = []
-
-
 class TrainingCertificateInline(admin.TabularInline):
     model = TrainingCertificate
     extra = 0
@@ -43,7 +35,6 @@ class UstazModelAdmin(admin.ModelAdmin):
     inlines = [
         EducationalQualificationInline,
         AchievementCertificateInline,
-        OrganizationTestimonialInline,
         TrainingCertificateInline,
     ]
     list_display = ["user", "birth_date", "nid_no", "is_verified"]

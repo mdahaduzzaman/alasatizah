@@ -15,7 +15,7 @@ class Organization(TimeStampedUUIDModel):
     website = models.URLField(max_length=100, null=True, blank=True)
     facebook_page = models.URLField(max_length=200, null=True, blank=True)
     youtube_page = models.URLField(max_length=200, null=True, blank=True)
-    head_name = models.CharField(max_length=100)
+    head_name = models.CharField(max_length=100, null=True, blank=True)
 
     def nid_upload_path(instance, filename):
         return f"Organization-Head-NID-{instance.id}/{filename}"

@@ -4,41 +4,29 @@
 {% block content %}
 <main class="bg-secondary">
     <div class="max-w-6xl mx-auto py-10">
-        <h1 class="mb-3 text-2xl md:text-3xl lg:text-4xl text-primary font-medium">Complete your organization profile</h1>
-        <p class="mb-5">Fill up the form carefully to complete your organization profile.</p>
+        <h1 class="mb-3 text-2xl md:text-3xl lg:text-4xl text-primary font-medium">Complete your institute profile</h1>
+        <p class="mb-5">Fill up the form carefully to complete your institute profile.</p>
         <form method="post" class="rounded-md bg-background p-5" enctype="multipart/form-data">
             {% csrf_token %}
 
-            <!-- including address form -->
-            {% include 'address-form.html' %}
-
-            <!-- city Field -->
+            <!-- name Field -->
             <div class="mb-4">
-                <label for="{{ address_form.city.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ address_form.city.label }}
-                    {% if address_form.city.field.required %}
+                <label for="{{ form.name.id_for_label }}" class="block mb-1 text-sm font-medium">
+                    {{ form.name.label }}
+                    {% if form.name.field.required %}
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ address_form.city|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if address_form.city.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ address_form.city.errors.0 }}</p>
+                {{ form.name|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.name.errors %}
+                <p class="text-red-500 text-sm mt-1">{{ form.name.errors.0 }}</p>
                 {% endif %}
             </div>
 
-            <!-- area Field -->
-            <div class="mb-4">
-                <label for="{{ address_form.area.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ address_form.area.label }}
-                    {% if address_form.area.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ address_form.area|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if address_form.area.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ address_form.area.errors.0 }}</p>
-                {% endif %}
-            </div>
+            <fieldset class="border border-gray-200 p-4 rounded-md mb-4">
+                <legend class="text-sm font-medium text-gray-700 px-1">Institute Address</legend>
+                {% include 'address-form.html' %}
+            </fieldset>
 
             <!-- website Field -->
             <div class="mb-4">
@@ -54,159 +42,6 @@
                 {% endif %}
             </div>
 
-            <!-- facebook_page Field -->
-            <div class="mb-4">
-                <label for="{{ form.facebook_page.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.facebook_page.label }}
-                    {% if form.facebook_page.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.facebook_page|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.facebook_page.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.facebook_page.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- youtube_page Field -->
-            <div class="mb-4">
-                <label for="{{ form.youtube_page.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.youtube_page.label }}
-                    {% if form.youtube_page.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.youtube_page|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.youtube_page.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.youtube_page.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- head_name Field -->
-            <div class="mb-4">
-                <label for="{{ form.head_name.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.head_name.label }}
-                    {% if form.head_name.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.head_name|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.head_name.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.head_name.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- head_nid Field -->
-            <div class="mb-4">
-                <label for="{{ form.head_nid.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.head_nid.label }}
-                    {% if form.head_nid.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.head_nid|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.head_nid.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.head_nid.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- head_avatar Field -->
-            <div class="mb-4">
-                <label for="{{ form.head_avatar.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.head_avatar.label }}
-                    {% if form.head_avatar.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.head_avatar|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.head_avatar.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.head_avatar.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- teacher_accomodation Field -->
-            <div class="mb-4">
-                <label for="{{ form.teacher_accomodation.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.teacher_accomodation.label }}
-                    {% if form.teacher_accomodation.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.teacher_accomodation|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.teacher_accomodation.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.teacher_accomodation.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- meal_routine Field -->
-            <div class="mb-4">
-                <label for="{{ form.meal_routine.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.meal_routine.label }}
-                    {% if form.meal_routine.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.meal_routine|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.meal_routine.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.meal_routine.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- hoilday_calendar Field -->
-            <div class="mb-4">
-                <label for="{{ form.hoilday_calendar.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.hoilday_calendar.label }}
-                    {% if form.hoilday_calendar.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.hoilday_calendar|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.hoilday_calendar.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.hoilday_calendar.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- rules Field -->
-            <div class="mb-4">
-                <label for="{{ form.rules.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.rules.label }}
-                    {% if form.rules.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.rules|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.rules.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.rules.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- committee_permission Field -->
-            <div class="mb-4">
-                <label for="{{ form.committee_permission.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.committee_permission.label }}
-                    {% if form.committee_permission.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.committee_permission|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.committee_permission.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.committee_permission.errors.0 }}</p>
-                {% endif %}
-            </div>
-
-            <!-- pledge Field -->
-            <div class="mb-4">
-                <label for="{{ form.pledge.id_for_label }}" class="block mb-1 text-sm font-medium">
-                    {{ form.pledge.label }}
-                    {% if form.pledge.field.required %}
-                    <span class="text-red-500">*</span>
-                    {% endif %}
-                </label>
-                {{ form.pledge|add_class:"w-full px-3 py-2 border rounded-md" }}
-                {% if form.pledge.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ form.pledge.errors.0 }}</p>
-                {% endif %}
-            </div>
             <!-- Submit Button -->
             <button type="submit"
                 class="mb-5 w-full bg-primary rounded-md text-white hover:text-primary transition-all duration-200 py-2 hover:bg-primary-foreground border border-primary">

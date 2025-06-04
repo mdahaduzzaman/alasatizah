@@ -9,7 +9,10 @@
             {% csrf_token %}
             
             <!-- including address form -->
-            {% include 'address-form.html' %}
+            <fieldset class="border border-gray-200 p-4 rounded-md mb-4">
+                <legend class="text-sm font-medium text-gray-700 px-1">Guardian/Student Address</legend>
+                {% include 'address-form.html' %}
+            </fieldset>
             
             <!-- Submit Button -->
             <button type="submit"
