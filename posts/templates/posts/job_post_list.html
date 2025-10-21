@@ -3,7 +3,7 @@
 <main class="">
     <div class="container mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row justify-between gap-3">
-            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 md:mb-8">Job Post Listings</h1>
+            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 md:mb-4">Job Post Listings</h1>
             {% if owner %}
             <div class="flex items-center text-sm md:text-[16px]">
                 <a href="{% url 'job_post_create' %}" class="flex items-center bg-green-100 hover:bg-green-200 text-green-900 hover px-3 py-1 transition-all cursor-pointer gap-2 rounded mb-2">
@@ -15,8 +15,29 @@
             </div>
             {% endif %}
         </div>
+        <div class="w-full mx-auto p-5">
+            <form method="get" action="" class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <!-- Search Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search-icon lucide-search text-slate-400">
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </svg>
+                </span>
+        
+                <input type="text" name="search" value="{{ query }}" placeholder="Search by title, author, or description..."
+                    class="block truncate w-full py-2 pl-10 pr-24 text-sm text-gray-900 border border-slate-200 rounded focus:ring-2 outline-none" />
+        
+                <button type="submit"
+                    class="absolute right-[0.5px] top-1/2 -translate-y-1/2 bg-blue-600 text-white text-sm px-5 py-2 rounded hover:bg-blue-700 transition-colors duration-200">
+                    Search
+                </button>
+            </form>
+        </div>
         <!-- Job Posts List -->
-        <div class="space-y-6">
+        <div class="space-y-6 mt-5">
             {% for job_post in page_obj %}
             <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
                 <div class="flex justify-between items-start">

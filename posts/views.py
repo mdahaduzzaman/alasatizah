@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from alasatizah.decorators.profile_required import guardian_or_organization_required, ustaz_required
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Q
 
 
 from guardian.models import Guardian
@@ -14,12 +15,22 @@ from core.forms import AddressForm
 
 
 def job_post_list_view(request):
-    job_posts = JobPost.objects.filter(
-        is_verified=True, status=JobStatusChoices.PUBLISHED
-    ).order_by("-created_at")
+    query = request.GET.get("search", "")
+    job_posts = (
+        JobPost.objects.select_related("address")
+        .filter(is_verified=True, status=JobStatusChoices.PUBLISHED)
+        .order_by("-created_at")
+    )
+
+    job_posts.filter(
+        Q(title__icontains=query)
+        | Q(description__icontains=query)
+        | Q(address__city__icontains=query)
+        | Q(address__area__icontains=query)
+    )
 
     paginator = Paginator(job_posts, 10)
-    page_number = request.GET.get("page")
+    page_number = request.GET.get("page", None)
 
     try:
         page_obj = paginator.page(page_number)
@@ -28,7 +39,7 @@ def job_post_list_view(request):
     except EmptyPage:
         page_obj = paginator.page(paginator.num_pages)
 
-    return render(request, "posts/job_post_list.html", {"page_obj": page_obj})
+    return render(request, "posts/job_post_list.html", {"page_obj": page_obj, "query": query})
 
 
 def job_post_detail_view(request, pk):
@@ -97,6 +108,7 @@ def job_post_update_view(request, pk):
 @guardian_or_organization_required
 @login_required
 def my_job_posts_view(request):
+    query = request.GET.get("search", "")
     guardian = Guardian.objects.filter(user=request.user).first()
 
     organization = Organization.objects.filter(user=request.user).first()
@@ -107,6 +119,13 @@ def my_job_posts_view(request):
     else:
         # If the user is an organization, get their job posts
         job_posts = organization.job_posts.all().order_by("-created_at")
+
+    job_posts.filter(
+        Q(title__icontains=query)
+        | Q(description__icontains=query)
+        | Q(address__city__icontains=query)
+        | Q(address__area__icontains=query)
+    )
 
     paginator = Paginator(job_posts, 10)
     page_number = request.GET.get("page")
@@ -120,7 +139,7 @@ def my_job_posts_view(request):
 
     # passing the owner so that the template can check if the user is the owner of the job posts
     return render(
-        request, "posts/job_post_list.html", {"page_obj": page_obj, "owner": True}
+        request, "posts/job_post_list.html", {"page_obj": page_obj, "owner": True, "query": query}
     )
 
 
