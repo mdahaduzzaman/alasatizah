@@ -1,8 +1,10 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from alasatizah.decorators.profile_required import guardian_or_organization_required, ustaz_required
-from django.contrib.contenttypes.models import ContentType
+from alasatizah.decorators.profile_required import (
+    guardian_or_organization_required,
+    ustaz_required,
+)
 from django.db.models import Q
 
 
@@ -22,7 +24,7 @@ def job_post_list_view(request):
         .order_by("-created_at")
     )
 
-    job_posts.filter(
+    job_posts = job_posts.filter(
         Q(title__icontains=query)
         | Q(description__icontains=query)
         | Q(address__city__icontains=query)
@@ -39,7 +41,9 @@ def job_post_list_view(request):
     except EmptyPage:
         page_obj = paginator.page(paginator.num_pages)
 
-    return render(request, "posts/job_post_list.html", {"page_obj": page_obj, "query": query})
+    return render(
+        request, "posts/job_post_list.html", {"page_obj": page_obj, "query": query}
+    )
 
 
 def job_post_detail_view(request, pk):
@@ -60,6 +64,8 @@ def job_post_create_view(request):
         organization = Organization.objects.filter(user=request.user).first()
 
         job_post: JobPost = form.save(commit=False)
+        job_post.is_verified = True
+        job_post.status = JobStatusChoices.PUBLISHED
         job_post.address = address
         job_post.content_object = guardian if guardian else organization
         job_post.save()
@@ -139,7 +145,9 @@ def my_job_posts_view(request):
 
     # passing the owner so that the template can check if the user is the owner of the job posts
     return render(
-        request, "posts/job_post_list.html", {"page_obj": page_obj, "owner": True, "query": query}
+        request,
+        "posts/job_post_list.html",
+        {"page_obj": page_obj, "owner": True, "query": query},
     )
 
 
@@ -177,12 +185,18 @@ def job_request_create_view(request):
     if request.method == "POST" and form.is_valid() and address_form.is_valid():
         address = address_form.save()
         job_request: UstazJobRequest = form.save(commit=False)
+        job_request.is_verified = True
+        job_request.status = JobStatusChoices.PUBLISHED
         job_request.address = address
         job_request.ustaz = ustaz
         job_request.save()
         return redirect("job_request_list")
 
-    return render(request, "posts/job_request_create.html", {"form": form, "address_form": address_form})
+    return render(
+        request,
+        "posts/job_request_create.html",
+        {"form": form, "address_form": address_form},
+    )
 
 
 @ustaz_required
@@ -200,7 +214,11 @@ def job_request_update_view(request, pk):
         job_request.save()
         return redirect("job_request_detail", pk)
 
-    return render(request, "posts/job_request_create.html", {"form": form, "instance": job_request, "address_form": address_form})
+    return render(
+        request,
+        "posts/job_request_create.html",
+        {"form": form, "instance": job_request, "address_form": address_form},
+    )
 
 
 @ustaz_required
@@ -219,4 +237,6 @@ def my_job_requests_view(request):
     except EmptyPage:
         page_obj = paginator.page(paginator.num_pages)
 
-    return render(request, "posts/job_request_list.html", {"page_obj": page_obj, "owner": True})
+    return render(
+        request, "posts/job_request_list.html", {"page_obj": page_obj, "owner": True}
+    )

@@ -8,6 +8,13 @@ from accounts.forms import SignUpForm
 from accounts.models import Role, User
 from core.forms import AddressForm
 from ustaz.forms import UstazForm
+from ustaz.models import (
+    Ustaz,
+    EducationalQualification,
+    TrainingCertificate,
+    AchievementCertificate,
+    OrganizationTestimonial,
+)
 
 
 @anonymous_required
@@ -24,7 +31,7 @@ def register_ustaz_view(request):
         user.roles.add(ustaz_role)
 
         login(request, user)
-        messages.success(request, "Successfully created organization user account")
+        messages.success(request, "Successfully created ustaz user account")
 
         # redirect to home page
         return redirect("index")
@@ -35,18 +42,47 @@ def register_ustaz_view(request):
 @ustaz_required
 @login_required
 def uztaz_complete_profile_view(request):
-    form = UstazForm(request.POST or None, request.FILES or None, user=request.user)
-    address_form = AddressForm(request.POST or None, request.FILES or None)
+    instance = Ustaz.objects.filter(user=request.user).first()
+
+    form = UstazForm(
+        request.POST or None,
+        request.FILES or None,
+        user=request.user,
+        instance=instance,
+    )
+    address_form = AddressForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=instance.address if instance else None,
+    )
 
     if request.method == "POST" and form.is_valid() and address_form.is_valid():
         address = address_form.save()
 
-        # Set the address before saving
-        ustaz = form.save(address=address, user=request.user)
+        if instance:
+            messages.success(request, "Successfully updated your ustaz profile")
+        else:
+            messages.success(request, "Successfully created your ustaz profile")
 
-        messages.success(request, "Successfully completed your ustaz profile")
+        # Set the address before saving
+        form.save(address=address, user=request.user)
 
         # redirect to home page
         return redirect("my_job_requests")
 
-    return render(request, "ustaz/complete-profile.html", {"form": form, "address_form": address_form})
+    education_files = EducationalQualification.objects.filter(ustaz=instance)
+    training_files = TrainingCertificate.objects.filter(ustaz=instance)
+    achievement_files = AchievementCertificate.objects.filter(ustaz=instance)
+    testimonial_files = OrganizationTestimonial.objects.filter(ustaz=instance)
+    return render(
+        request,
+        "ustaz/complete-profile.html",
+        {
+            "form": form,
+            "address_form": address_form,
+            "education_files": education_files,
+            "training_files": training_files,
+            "achievement_files": achievement_files,
+            "testimonial_files": testimonial_files,
+        },
+    )

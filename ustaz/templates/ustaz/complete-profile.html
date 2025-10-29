@@ -4,8 +4,8 @@
 {% block content %}
 <main class="bg-secondary">
     <div class="max-w-6xl mx-auto py-10">
-        <h1 class="mb-3 text-2xl md:text-3xl lg:text-4xl text-primary font-medium">Complete your ustaz profile</h1>
-        <p class="mb-5">Fill up the form carefully to complete your ustaz profile.</p>
+        <h1 class="mb-3 text-2xl md:text-3xl lg:text-4xl text-primary font-medium px-4">Complete your ustaz profile</h1>
+        <p class="mb-5 px-4">Fill up the form carefully to complete your ustaz profile.</p>
         <form method="post" class="rounded-md bg-background p-5" enctype="multipart/form-data">
             {% csrf_token %}
 
@@ -56,7 +56,6 @@
                 <p class="text-red-500 text-sm mt-1">{{ form.birth_certificate_no.errors.0 }}</p>
                 {% endif %}
             </div>
-
             <!-- nid_front Field -->
             <div class="mb-4">
                 <label for="{{ form.nid_front.id_for_label }}" class="block mb-1 text-sm font-medium">
@@ -65,7 +64,42 @@
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.nid_front|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.nid_front.value %}
+                {% with file_url=form.nid_front.value.url %}
+                {% comment %} Simple check based on common image file extensions {% endcomment %}
+                {% if file_url|lower|slice:"-4:" == ".png" or file_url|lower|slice:"-4:" == ".jpg" or file_url|lower|slice:"-5:" == ".jpeg" or file_url|lower|slice:"-4:" == ".gif" %}
+                    
+                    <img src="{{ file_url }}" 
+                        alt="Education Certificate" 
+                        class="w-20 h-20 object-cover rounded-md mb-2 mr-2 border"/>
+                        
+                {% elif file_url|lower|slice:"-4:" == ".pdf" %}
+                    
+                    {% comment %} For PDF, show a link to open in a new tab or an iframe {% endcomment %}
+                    <a href="{{ file_url }}" 
+                    target="_blank" 
+                    class="flex items-center justify-center p-2 border rounded-md text-red-600 bg-red-100 h-20 w-20 text-xs font-semibold hover:bg-red-200" 
+                    title="Open PDF Certificate">
+                        <i class="fas fa-file-pdf text-lg mb-1"></i>
+                        <span>PDF</span>
+                    </a>
+                    
+                {% else %}
+                    
+                    {% comment %} Fallback for other file types {% endcomment %}
+                    <a href="{{ file_url }}" 
+                    target="_blank" 
+                    class="flex items-center justify-center p-2 border rounded-md text-gray-600 bg-gray-100 h-20 w-20 text-xs font-semibold hover:bg-gray-200"
+                    title="Open File">
+                        <i class="fas fa-file text-lg mb-1"></i>
+                        <span>File</span>
+                    </a>
+                    
+                {% endif %}
+            {% endwith %}
+                {% endif %}
+                <input type="file" name="{{ form.nid_front.name }}" id="{{ form.nid_front.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
                 {% if form.nid_front.help_text %}
                 <p class="mt-1 text-sm text-gray-500">{{ form.nid_front.help_text }}</p>
                 {% endif %}
@@ -74,7 +108,9 @@
                 {% endif %}
             </div>
 
+
             <!-- nid_back Field -->
+            {% if form.nid_back %}
             <div class="mb-4">
                 <label for="{{ form.nid_back.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.nid_back.label }}
@@ -82,13 +118,30 @@
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.nid_back|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.nid_back.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.nid_back.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input type="file" name="{{ form.nid_back.name }}" id="{{ form.nid_back.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.nid_back.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.nid_back.help_text }}</p>
+                {% endif %}
                 {% if form.nid_back.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.nid_back.errors.0 }}</p>
                 {% endif %}
             </div>
+            {% endif %}
 
             <!-- guardian_permission_letter Field -->
+            {% if form.guardian_permission_letter %}
             <div class="mb-4">
                 <label for="{{ form.guardian_permission_letter.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.guardian_permission_letter.label }}
@@ -96,13 +149,30 @@
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.guardian_permission_letter|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.guardian_permission_letter.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.guardian_permission_letter.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input type="file" name="{{ form.guardian_permission_letter.name }}" id="{{ form.guardian_permission_letter.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.guardian_permission_letter.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.guardian_permission_letter.help_text }}</p>
+                {% endif %}
                 {% if form.guardian_permission_letter.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.guardian_permission_letter.errors.0 }}</p>
                 {% endif %}
             </div>
+            {% endif %}
 
             <!-- chairman_certificate Field -->
+            {% if form.chairman_certificate %}
             <div class="mb-4">
                 <label for="{{ form.chairman_certificate.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.chairman_certificate.label }}
@@ -110,13 +180,30 @@
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.chairman_certificate|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.chairman_certificate.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.chairman_certificate.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input type="file" name="{{ form.chairman_certificate.name }}" id="{{ form.chairman_certificate.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.chairman_certificate.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.chairman_certificate.help_text }}</p>
+                {% endif %}
                 {% if form.chairman_certificate.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.chairman_certificate.errors.0 }}</p>
                 {% endif %}
             </div>
+            {% endif %}
 
             <!-- pledge Field -->
+            {% if form.pledge %}
             <div class="mb-4">
                 <label for="{{ form.pledge.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.pledge.label }}
@@ -124,13 +211,30 @@
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.pledge|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.pledge.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.pledge.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input type="file" name="{{ form.pledge.name }}" id="{{ form.pledge.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.pledge.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.pledge.help_text }}</p>
+                {% endif %}
                 {% if form.pledge.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.pledge.errors.0 }}</p>
                 {% endif %}
             </div>
+            {% endif %}
 
             <!-- teacher_appreciation Field -->
+            {% if form.teacher_appreciation %}
             <div class="mb-4">
                 <label for="{{ form.teacher_appreciation.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.teacher_appreciation.label }}
@@ -138,71 +242,280 @@
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.teacher_appreciation|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.teacher_appreciation.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.teacher_appreciation.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input type="file" name="{{ form.teacher_appreciation.name }}" id="{{ form.teacher_appreciation.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.teacher_appreciation.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.teacher_appreciation.help_text }}</p>
+                {% endif %}
                 {% if form.teacher_appreciation.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.teacher_appreciation.errors.0 }}</p>
                 {% endif %}
             </div>
+            {% endif %}
 
             <!-- education_files Field -->
+            {% if form.education_files %}
             <div class="mb-4">
+                {% if education_files %}
+                <p class="text-primary text-sm">Current Education Certificates:</p>
+                <div class="flex mt-2 flex-wrap gap-4">
+                    {% for file in education_files %}
+                        {% with file_url=file.file.url %}
+                            {% comment %} Simple check based on common image file extensions {% endcomment %}
+                            {% if file_url|lower|slice:"-4:" == ".png" or file_url|lower|slice:"-4:" == ".jpg" or file_url|lower|slice:"-5:" == ".jpeg" or file_url|lower|slice:"-4:" == ".gif" %}
+                                
+                                <img src="{{ file_url }}" 
+                                    alt="Education Certificate" 
+                                    class="w-20 h-20 object-cover rounded-md mb-2 mr-2 border"/>
+                                    
+                            {% elif file_url|lower|slice:"-4:" == ".pdf" %}
+                                
+                                {% comment %} For PDF, show a link to open in a new tab or an iframe {% endcomment %}
+                                <a href="{{ file_url }}" 
+                                target="_blank" 
+                                class="flex items-center justify-center p-2 border rounded-md text-red-600 bg-red-100 h-20 w-20 text-xs font-semibold hover:bg-red-200" 
+                                title="Open PDF Certificate">
+                                    <i class="fas fa-file-pdf text-lg mb-1"></i>
+                                    <span>PDF</span>
+                                </a>
+                                
+                            {% else %}
+                                
+                                {% comment %} Fallback for other file types {% endcomment %}
+                                <a href="{{ file_url }}" 
+                                target="_blank" 
+                                class="flex items-center justify-center p-2 border rounded-md text-gray-600 bg-gray-100 h-20 w-20 text-xs font-semibold hover:bg-gray-200"
+                                title="Open File">
+                                    <i class="fas fa-file text-lg mb-1"></i>
+                                    <span>File</span>
+                                </a>
+                                
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <label for="{{ form.education_files.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.education_files.label }}
                     {% if form.education_files.field.required %}
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.education_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.education_files.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.education_files.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input multiple type="file" name="{{ form.education_files.name }}" id="{{ form.education_files.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.education_files.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.education_files.help_text }}</p>
+                {% endif %}
                 {% if form.education_files.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.education_files.errors.0 }}</p>
                 {% endif %}
                 <div id="id_education_files_preview"></div>
             </div>
+            {% endif %}
 
             <!-- training_files Field -->
+            {% if form.training_files %}
             <div class="mb-4">
+                {% if training_files %}
+                <p class="text-primary text-sm">Current Training Certificates:</p>
+                <div class="flex mt-2 flex-wrap gap-4">
+                    {% for file in training_files %}
+                        {% with file_url=file.file.url %}
+                            {% comment %} Simple check based on common image file extensions {% endcomment %}
+                            {% if file_url|lower|slice:"-4:" == ".png" or file_url|lower|slice:"-4:" == ".jpg" or file_url|lower|slice:"-5:" == ".jpeg" or file_url|lower|slice:"-4:" == ".gif" %}
+                                
+                                <img src="{{ file_url }}" 
+                                    alt="Education Certificate" 
+                                    class="w-20 h-20 object-cover rounded-md mb-2 mr-2 border"/>
+                                    
+                            {% elif file_url|lower|slice:"-4:" == ".pdf" %}
+                                
+                                {% comment %} For PDF, show a link to open in a new tab or an iframe {% endcomment %}
+                                <a href="{{ file_url }}" 
+                                target="_blank" 
+                                class="flex items-center justify-center p-2 border rounded-md text-red-600 bg-red-100 h-20 w-20 text-xs font-semibold hover:bg-red-200" 
+                                title="Open PDF Certificate">
+                                    <i class="fas fa-file-pdf text-lg mb-1"></i>
+                                    <span>PDF</span>
+                                </a>
+                                
+                            {% else %}
+                                
+                                {% comment %} Fallback for other file types {% endcomment %}
+                                <a href="{{ file_url }}" 
+                                target="_blank" 
+                                class="flex items-center justify-center p-2 border rounded-md text-gray-600 bg-gray-100 h-20 w-20 text-xs font-semibold hover:bg-gray-200"
+                                title="Open File">
+                                    <i class="fas fa-file text-lg mb-1"></i>
+                                    <span>File</span>
+                                </a>
+                                
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <label for="{{ form.training_files.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.training_files.label }}
                     {% if form.training_files.field.required %}
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.training_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.training_files.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.training_files.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input multiple type="file" name="{{ form.training_files.name }}" id="{{ form.training_files.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.training_files.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.training_files.help_text }}</p>
+                {% endif %}
                 {% if form.training_files.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.training_files.errors.0 }}</p>
                 {% endif %}
                 <div id="id_training_files_preview"></div>
             </div>
+            {% endif %}
 
             <!-- achievement_files Field -->
+            {% if form.achievement_files %}
             <div class="mb-4">
+                {% if achievement_files %}
+                <p class="text-primary text-sm">Current Achievement Certificates:</p>
+                <div class="flex mt-2 flex-wrap gap-4">
+                    {% for file in achievement_files %}
+                        {% with file_url=file.file.url %}
+                            {% comment %} Simple check based on common image file extensions {% endcomment %}
+                            {% if file_url|lower|slice:"-4:" == ".png" or file_url|lower|slice:"-4:" == ".jpg" or file_url|lower|slice:"-5:" == ".jpeg" or file_url|lower|slice:"-4:" == ".gif" %}
+                                
+                                <img src="{{ file_url }}" 
+                                    alt="Education Certificate" 
+                                    class="w-20 h-20 object-cover rounded-md mb-2 mr-2 border"/>
+                                    
+                            {% elif file_url|lower|slice:"-4:" == ".pdf" %}
+                                
+                                {% comment %} For PDF, show a link to open in a new tab or an iframe {% endcomment %}
+                                <a href="{{ file_url }}" 
+                                target="_blank" 
+                                class="flex items-center justify-center p-2 border rounded-md text-red-600 bg-red-100 h-20 w-20 text-xs font-semibold hover:bg-red-200" 
+                                title="Open PDF Certificate">
+                                    <i class="fas fa-file-pdf text-lg mb-1"></i>
+                                    <span>PDF</span>
+                                </a>
+                                
+                            {% else %}
+                                
+                                {% comment %} Fallback for other file types {% endcomment %}
+                                <a href="{{ file_url }}" 
+                                target="_blank" 
+                                class="flex items-center justify-center p-2 border rounded-md text-gray-600 bg-gray-100 h-20 w-20 text-xs font-semibold hover:bg-gray-200"
+                                title="Open File">
+                                    <i class="fas fa-file text-lg mb-1"></i>
+                                    <span>File</span>
+                                </a>
+                                
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <label for="{{ form.achievement_files.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.achievement_files.label }}
                     {% if form.achievement_files.field.required %}
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.achievement_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.achievement_files.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.achievement_files.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input multiple type="file" name="{{ form.achievement_files.name }}" id="{{ form.achievement_files.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.achievement_files.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.achievement_files.help_text }}</p>
+                {% endif %}
                 {% if form.achievement_files.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.achievement_files.errors.0 }}</p>
                 {% endif %}
                 <div id="id_achievement_files_preview"></div>
             </div>
+            {% endif %}
 
             <!-- testimonial_files Field -->
+            {% if form.testimonial_files %}
             <div class="mb-4">
+                {% if testimonial_files %}
+                <p class="text-primary text-sm">Current Testimonial Certificates:</p>
+                <div class="flex mt-2 flex-wrap gap-4">
+                    {% for file in testimonial_files %}
+                        <img src="{{ file.file.url }}" alt="Testimonial Certificate" class="w-20 h-20 object-cover rounded-md mb-2 mr-2 border"/>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <label for="{{ form.testimonial_files.id_for_label }}" class="block mb-1 text-sm font-medium">
                     {{ form.testimonial_files.label }}
                     {% if form.testimonial_files.field.required %}
                     <span class="text-red-500">*</span>
                     {% endif %}
                 </label>
-                {{ form.testimonial_files|add_class:"w-full px-3 py-2 border rounded-md" }}
+                {% if form.testimonial_files.value %}
+                <p class="mb-2 text-sm text-primary">
+                    <a class="flex items-center gap-2" href="{{ form.testimonial_files.value.url }}" target="_blank">View
+                        Current File <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                        </svg>
+                    </a>
+                </p>
+                {% endif %}
+                <input multiple type="file" name="{{ form.testimonial_files.name }}" id="{{ form.testimonial_files.id_for_label }}"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#1d4ed4] focus:border-[#1d4ed4] file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-[#1d4ed4] transition-all" />
+                {% if form.testimonial_files.help_text %}
+                <p class="mt-1 text-sm text-gray-500">{{ form.testimonial_files.help_text }}</p>
+                {% endif %}
                 {% if form.testimonial_files.errors %}
                 <p class="text-red-500 text-sm mt-1">{{ form.testimonial_files.errors.0 }}</p>
                 {% endif %}
                 <div id="id_testimonial_files_preview"></div>
             </div>
+            {% endif %}
             <!-- Submit Button -->
             <button type="submit"
                 class="mb-5 w-full bg-primary rounded-md text-white hover:text-primary transition-all duration-200 py-2 hover:bg-primary-foreground border border-primary">
@@ -230,7 +543,7 @@
             selectedFiles = [...selectedFiles, ...newFiles];
             updatePreviews();
         });
-        
+
         // function to check whether the div needs the styling or not
         function updatePreviewGridClass() {
             if (selectedFiles.length > 0) {
@@ -244,11 +557,6 @@
         function updatePreviews() {
             previewGrid.innerHTML = "";
             updatePreviewGridClass()
-
-            console.log("fileInput.src", fileInput.src)
-            console.log("fileInput.value", fileInput.value)
-            console.log("fileInput", fileInput.files)
-            console.log("selectedFiles", selectedFiles)
 
             selectedFiles.forEach((file, index) => {
                 const previewWrapper = document.createElement("div");
@@ -320,7 +628,7 @@
     const educationFileInput = makeFileInputDynamic("id_education_files", "id_education_files_preview");
     const trainingFileInput = makeFileInputDynamic("id_training_files", "id_training_files_preview");
     const achivementFileInput = makeFileInputDynamic("id_achievement_files", "id_achievement_files_preview");
-    const testimonialFileInput = makeFileInputDynamic("id_testimonial_files", "id_testimonial_files_preview");
+    {% comment %} const testimonialFileInput = makeFileInputDynamic("id_testimonial_files", "id_testimonial_files_preview"); {% endcomment %}
 
 </script>
 {% endblock content %}

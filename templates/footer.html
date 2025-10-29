@@ -16,7 +16,7 @@
             <span class="font-semibold text-white text-lg">Alasatizah</span>
           </a>
         </div>
-        <p class="max-w-xs text-justify text-sm">
+        <p class="md:max-w-xs text-justify text-sm">
           Alasatizah was founded in 2025. It is Bangladesh's first, most trusted
           and leading online platform for institute and ustaz to hire
           verified ustaz or find ustaz jobs in 10 different categories from
@@ -29,9 +29,8 @@
         <h5 class="font-semibold text-xl mb-4">Useful Links</h5>
         <div class="flex flex-col gap-2">
           <a href="{% url 'terms-condition' %}" class="hover:font-bold transition-all duration-200">Terms and Condition</a>
-          <a href="#" class="hover:font-bold transition-all duration-200">Become a Ustaz</a>
-          <a href="#" class="hover:font-bold transition-all duration-200">Hire a Ustaz</a>
-          <a href="#" class="hover:font-bold transition-all duration-200">FAQ</a>
+          <a href="{% url 'signup/ustaz' %}" class="hover:font-bold transition-all duration-200">Become a Ustaz</a>
+          <a href="{% url 'job_post_list' %}" class="hover:font-bold transition-all duration-200">Hire a Ustaz</a>
         </div>
       </div>
 
@@ -71,14 +70,14 @@
       </div>
 
       <!-- Company Info -->
-      <div class="w-full">
+      {% comment %} <div class="w-full">
         <h5 class="font-semibold text-xl mb-4">Company Info</h5>
         <div class="text-sm space-y-2">
           <p>Trade licence No:<br />TRAD/DNCC/00000/0000</p>
           <p>E-TIN Number: 0000000000</p>
           <p>BIN Number: 0000000-0000</p>
         </div>
-      </div>
+      </div> {% endcomment %}
     </div>
 
     <!-- copyright -->

@@ -40,3 +40,4 @@ class UstazModelAdmin(admin.ModelAdmin):
     list_display = ["user", "birth_date", "nid_no", "is_verified"]
     search_fields = ["user__name", "user__email"]
     list_filter = ["is_verified"]
+    readonly_fields = ["id", "created_at", "updated_at"]

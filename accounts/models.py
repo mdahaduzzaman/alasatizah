@@ -16,9 +16,7 @@ class Role(Group):
 
 
 class User(AbstractBaseUser, PermissionsMixin, TimeStampedUUIDModel):
-    name = models.CharField(
-        max_length=100, validators=[MinLengthValidator(2)]
-    )
+    name = models.CharField(max_length=100, validators=[MinLengthValidator(2)])
     email = models.EmailField(max_length=100, unique=True)
     phone = models.CharField(
         max_length=20,
@@ -29,7 +27,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedUUIDModel):
     gender = models.CharField(max_length=10, choices=GenderChoices.choices)
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    roles = models.ManyToManyField(Role, related_name="users", blank=True) 
+    roles = models.ManyToManyField(Role, related_name="users", blank=True)
     is_deleted = models.BooleanField(default=False)
 
     def avatar_upload_path(instance, filename):
@@ -40,7 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedUUIDModel):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ["name"]
 
     def __str__(self):
         return self.name
@@ -51,7 +49,11 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedUUIDModel):
     def save(self, *args, **kwargs):
         # Check if the instance already exists in the DB
         if self.pk:
-            old_avatar = User.objects.filter(pk=self.pk).values_list("avatar", flat=True).first()
+            old_avatar = (
+                self.__class__.objects.filter(pk=self.pk)
+                .values_list("avatar", flat=True)
+                .first()
+            )
             if old_avatar and self.avatar and old_avatar != self.avatar.name:
                 # Delete old avatar file
                 if default_storage.exists(old_avatar):

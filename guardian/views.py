@@ -10,7 +10,6 @@ from core.forms import AddressForm
 from guardian.models import Guardian
 
 
-
 def register_guardian_view(request):
     form = SignUpForm(request.POST or None, request.FILES or None)
 
@@ -24,7 +23,9 @@ def register_guardian_view(request):
         user.roles.add(ustaz_role)
 
         login(request, user)
-        messages.success(request, "Successfully created guardian or student user account")
+        messages.success(
+            request, "Successfully created guardian or student user account"
+        )
 
         # redirect to home page
         return redirect("index")
@@ -35,17 +36,26 @@ def register_guardian_view(request):
 @guardian_required
 @login_required
 def guardian_complete_profile_view(request):
-    address_form = AddressForm(request.POST or None, request.FILES or None)
+    instance = Guardian.objects.filter(user=request.user).first()
+    address_form = AddressForm(
+        request.POST or None, request.FILES or None, instance=instance
+    )
 
     if request.method == "POST" and address_form.is_valid():
         address = address_form.save()
 
         # Set the address before saving
-        guardian = Guardian.objects.create(address=address, user=request.user, is_verified = True)
+        guardian = Guardian.objects.create(
+            address=address, user=request.user, is_verified=True
+        )
 
-        messages.success(request, "Successfully completed your guardian or student profile")
+        messages.success(
+            request, "Successfully completed your guardian or student profile"
+        )
 
         # redirect to home page
         return redirect("my_job_posts")
 
-    return render(request, "guardian/complete-profile.html", {"address_form": address_form})
+    return render(
+        request, "guardian/complete-profile.html", {"address_form": address_form}
+    )

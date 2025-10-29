@@ -1,7 +1,7 @@
 {% extends "_base.html" %}
 {% block content %}
 <main class="">
-    <div class="max-w-4xl mx-auto my-10 p-6 bg-white rounded-xl shadow-md overflow-hidden">
+    <div class="max-w-4xl mx-auto my-10 p-6 bg-white rounded-xl border-t shadow-md overflow-hidden">
         <!-- Header Section -->
         <div class="flex justify-between items-start mb-6">
             <div>
@@ -130,7 +130,9 @@
             {% if request.user.is_authenticated %}
             <div class="flex items-center space-x-4">
                 <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
-                    <img src="{{ job_post.content_object.user.avatar.url }}" alt="User Profile Picture" class="w-12 h-12 rounded-full object-cover">
+                    {% if job_post.content_object.user.avatar %}
+                        <img src="{{ job_post.content_object.user.avatar.url }}" alt="User Profile Picture" class="w-12 h-12 rounded-full object-cover">
+                    {% endif %}
                 </div>
                 <div>
                     <h3 class="font-medium text-gray-800">{{ job_post.content_object.user.name }}</h3>

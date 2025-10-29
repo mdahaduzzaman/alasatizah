@@ -3,11 +3,15 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from alasatizah.decorators.profile_required import anonymous_required, organization_required
+from alasatizah.decorators.profile_required import (
+    anonymous_required,
+    organization_required,
+)
 from accounts.forms import SignUpForm
 from accounts.models import Role, User
 from core.forms import AddressForm
 from organization.forms import OrganizationForm
+from organization.models import Organization
 
 
 @anonymous_required
@@ -35,7 +39,13 @@ def register_organization_view(request):
 @organization_required
 @login_required
 def organization_complete_profile_view(request):
-    form = OrganizationForm(request.POST or None, request.FILES or None, user=request.user)
+    instance = Organization.objects.filter(user=request.user).first()
+    form = OrganizationForm(
+        request.POST or None,
+        request.FILES or None,
+        user=request.user,
+        instance=instance,
+    )
     address_form = AddressForm(request.POST or None, request.FILES or None)
 
     if request.method == "POST" and form.is_valid() and address_form.is_valid():
@@ -43,9 +53,13 @@ def organization_complete_profile_view(request):
 
         # Set the address before saving
         organization = form.save(address=address, user=request.user)
-        
+
         messages.success(request, "Successfully completed your organization profile")
         # redirect to home page
         return redirect("my_job_posts")
 
-    return render(request, "organization/complete-profile.html", {"form": form, "address_form": address_form})
+    return render(
+        request,
+        "organization/complete-profile.html",
+        {"form": form, "address_form": address_form},
+    )

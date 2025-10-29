@@ -1,3 +1,4 @@
+{% if ustaz_testimonials %}
 <section class="bg-background">
   <div class="my-5 max-w-6xl mx-auto px-4 overflow-hidden">
     <div class="flex flex-col items-center">
@@ -7,12 +8,10 @@
       <p class="text-sm md:text-[16px] lg:text-lg mt-5 mb-3">
         Become a ustaz and start earning!
       </p>
-      <button
-        class="relative mt-2 mb-3 py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition duration-300 animate-[wave-pulse_2s_infinite]"
-        style="--tw-shadow-color: rgb(var(--primary))"
-      >
+      <a href="{% url 'signup/ustaz' %}"
+        class="inline-block relative mt-2 mb-3 py-2 px-3 border border-primary bg-primary text-primary-foreground hover:text-primary rounded-lg hover:bg-background hover transition duration-300 animate-[wave-pulse_2s_infinite]">
         Become a Ustaz
-      </button>
+      </a>
     </div>
 
     <!-- Carousel Wrapper -->
@@ -20,32 +19,31 @@
       <!-- Carousel Track -->
       <div class="flex gap-7 justify-center w-max mx-auto">
         <!-- Carousel Item -->
-        <div
-          class="bg-secondary rounded-xl p-10 relative mt-36 w-[21rem] md:w-[40rem] lg:w-[52rem] shrink-0"
-        >
+        {% for testimonial in ustaz_testimonials %}
+        <div class="bg-secondary rounded-xl p-10 relative mt-36 w-[21rem] md:w-[40rem] lg:w-[52rem] shrink-0">
           <!-- Avatar Circle -->
           <div
-            class="size-32 lg:size-40 aspect-square rounded-full absolute top-[-100px] lg:top-[-130px] left-1/2 -translate-x-1/2 border-2 border-primary p-1 flex items-center justify-center bg-white"
-          >
-            <div class="w-full h-full rounded-full bg-red-200"></div>
+            class="size-32 lg:size-40 aspect-square rounded-full absolute top-[-100px] lg:top-[-130px] left-1/2 -translate-x-1/2 border-2 border-primary p-1 flex items-center justify-center bg-white">
+            <div class="w-full h-full rounded-full bg-red-200">
+              {% if testimonial.image %}
+              <img src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}"
+                class="w-full h-full object-cover rounded-full" />
+              {% endif %}
+            </div>
           </div>
 
           <!-- Text Content -->
-          <h2 class="text-center text-xl md:text-2xl font-medium">John Doe</h2>
+          <h2 class="text-center text-xl md:text-2xl font-medium">{{ testimonial.name }}</h2>
           <p class="text-center mt-2 mb-5 md:mb-10 text-[12px] md:text-sm">
-            Dhaka University
+            {{ testimonial.position }}
           </p>
 
           <!-- Overflow-safe content body -->
           <div class="overflow-hidden text-wrap text-[12px] md:text-sm">
-            Very professional, trustworthy, helpful, and a clean platform for
-            finding any tutor. Since 2018, I've been using this platform to hire
-            tutors and I'm really satisfied with their cooperation and the
-            quality of the tutor. Because of their professionalism & commitment
-            to providing excellent service, I would highly recommend this
-            platform.
+            {{ testimonial.description }}
           </div>
         </div>
+        {% endfor %}
         <!-- Add more items below if needed -->
       </div>
     </div>
@@ -62,3 +60,4 @@
     </div>
   </div>
 </section>
+{% endif %}

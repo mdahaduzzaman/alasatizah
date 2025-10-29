@@ -3,11 +3,12 @@
 <main class="">
     <div class="container mx-auto px-4 py-8">
         <div class="flex flex-col md:flex-row justify-between gap-3">
-            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 md:mb-4">Job Post Listings</h1>
+            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 md:mb-4">Available Jobs</h1>
             {% if owner %}
             <div class="flex items-center text-sm md:text-[16px]">
-                <a href="{% url 'job_post_create' %}" class="flex items-center bg-green-100 hover:bg-green-200 text-green-900 hover px-3 py-1 transition-all cursor-pointer gap-2 rounded mb-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                <a href="{% url 'job_post_create' %}" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-[#4b4bad] text-white font-medium shadow-sm hover:shadow-md transition-all duration-200 ease-in-out"
+>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
                     <span>
                         Add Job Post
                     </span>
@@ -39,12 +40,12 @@
         <!-- Job Posts List -->
         <div class="space-y-6 mt-5">
             {% for job_post in page_obj %}
-            <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div class="{% if forloop.counter|divisibleby:2 %}bg-slate-100{% else %}bg-white{% endif %} rounded-lg shadow-md p-6 hover:shadow-lg border-t transition-shadow">
                 <div class="flex justify-between items-start">
                     <div>
                         <h2 class="text-xl font-semibold text-gray-800">
                             <a href="{% url 'job_post_detail' job_post.pk %}" class="hover:text-blue-600">
-                                {{ job_post.title }}
+                                {{ job_post.title }} - {{ forloop.counter }}
                             </a>
                         </h2>
                         <div class="mt-2 text-sm text-gray-500">
